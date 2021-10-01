@@ -1,0 +1,18 @@
+---
+  - name: intall uwsgi
+    apt:
+      name:
+        - uwsgi
+        - uwsgi-plugin-python3
+
+  - name: Start service
+    service:
+      name: uwsgi
+      state: started
+      enabled: yes
+
+  - name: Add the configuration agama for agama
+    copy:
+      src: /home/aleksandr/ansible/ica0002/roles/uwsgi/files/agama.ini
+      dest: /etc/uwsgi/apps-enabled/agama.ini
+    notify: Restart uwsgi
