@@ -1,0 +1,16 @@
+---
+  - name: Install nginx
+    apt:
+        name: nginx
+        state: latest
+        update_cache: yes
+
+  - name: Start nginx
+    service:
+        name: nginx
+        state: started
+
+  - name: Copy index to www
+    ansible.builtin.copy:
+      src: /home/aleksandr/ansible/ica0002/roles/nginx/files/index.html
+      dest: /var/www/html

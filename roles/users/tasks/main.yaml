@@ -1,0 +1,22 @@
+---
+  - name: Create user
+    ansible.builtin.user: 
+      name: roman
+      shell: /bin/bash
+
+  - name: Set authorized keys taken from url
+    ansible.posix.authorized_key:
+      user: roman
+      state: present
+      key: https://github.com/romankuchin.keys
+
+  - name: Create user
+    ansible.builtin.user: 
+      name: juri
+      shell: /bin/bash
+
+  - name: Set authorized keys taken from url
+    ansible.posix.authorized_key:
+      user: juri
+      state: present
+      key: https://github.com/hudolejev.keys
