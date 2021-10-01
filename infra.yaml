@@ -1,9 +1,5 @@
 ---
-  - name: Web server
-    hosts: web_servers
-    become: yes
+  - name: Ansible connection test
+    hosts: all
     roles:
-      - users
-      - agama
-      - uwsgi
-      - nginx
+      - test_connection
