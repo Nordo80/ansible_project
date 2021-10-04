@@ -5,3 +5,5 @@
     roles:
       - users
       - nginx
+      - agama
+      - uwsgi
