@@ -1,4 +1,10 @@
 ---
+  - name: Database server
+    hosts: db_servers
+    roles:
+      - mysql
+    become: yes
+
   - name: Web server
     hosts: web_servers
     become: yes
