@@ -1,0 +1,12 @@
+$TTL	604800
+{{ domain_name}}.	IN	SOA	Nordo80-2.{{ domain_name }}. root.{{ domain_name }}. (
+			      2		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+;
+
+{{ domain_name }}.      IN	NS	Nordo80-2
+Nordo80-1        	IN	A	{{ vm1_ip }}
+Nordo80-2        	IN	A	{{ vm2_ip }}

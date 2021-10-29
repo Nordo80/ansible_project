@@ -1,20 +1,15 @@
 ---
-  - name: Install agama dependecies
-    apt:
-        name: python3-flask-sqlalchemy
-        state: latest
-        update_cache: yes
-
-  - name: Download agama.py
-    get_url:
-      url: https://raw.githubusercontent.com/hudolejev/agama/master/agama.py
-      dest: /opt/agama
-
   - name: Add the user 'agama'
     user:
       name: agama
       comment: web app user
       system: yes
+
+  - name: Install agama dependecies
+    apt:
+        name: python3-flask-sqlalchemy
+        state: latest
+        update_cache: yes
 
   - name: Create install directory
     file:
@@ -22,4 +17,10 @@
       path: /opt/agama
       owner: agama
       group: agama
+      mode: 0755
+
+  - name: Download agama.py
+    get_url:
+      url: https://raw.githubusercontent.com/hudolejev/agama/master/agama.py
+      dest: /opt/agama
       mode: 0755

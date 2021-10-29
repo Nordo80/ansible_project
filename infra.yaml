@@ -4,12 +4,13 @@
     roles:
       - mysql
     become: yes
+    no_log: yes
 
-  - name: Web server
+  - name: Web app
     hosts: web_servers
-    become: yes
     roles:
-      - users
-      - nginx
       - agama
       - uwsgi
+      - nginx
+    become: yes
+

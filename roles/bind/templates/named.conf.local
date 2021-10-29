@@ -1,0 +1,6 @@
+zone "efiffel.ttu" {
+  type primary;
+  file "/etc/bind/db.efiffel.ttu";
+};
+
+
