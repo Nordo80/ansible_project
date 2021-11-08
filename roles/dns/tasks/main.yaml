@@ -1,0 +1,11 @@
+---
+  - name: disable systemd-resolved
+    service:
+      name: systemd-resolved
+      state: stopped
+      enabled: no
+
+  - name: copy resolv.conf
+    template:
+      src: resolv.conf
+      dest: /etc/resolv.conf

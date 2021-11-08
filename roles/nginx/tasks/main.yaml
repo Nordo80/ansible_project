@@ -6,8 +6,8 @@
         update_cache: yes
 
   - name: Copy config
-    copy:
-      src: /home/aleksandr/ansible/ica0002/roles/nginx/files/default
+    template:
+      src: default.j2
       dest: /etc/nginx/sites-enabled/default
     notify: Restart nginx service
 

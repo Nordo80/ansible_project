@@ -1,4 +1,4 @@
-mysql_host: 192.168.42.90
+mysql_host: 192.168.42.111
 mysql_database: agama
 mysql_user: agama
 mysql_password: !vault |
@@ -15,6 +15,9 @@ dns_forwarders:
   - 9.9.9.10
 local_network: 192.168.42.0/24
 localhost: 127.0.0.0/8
-vm1_ip: 192.168.42.26
-vm2_ip: 192.168.42.38
+vm1_ip: 192.168.42.136
+vm2_ip: 192.168.42.48
 domain_name: efiffel.ttu
+vm1: Nordo80-1
+vm2: Nordo80-2
+machine_ip: 193.40.156.86

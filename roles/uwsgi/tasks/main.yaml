@@ -11,8 +11,8 @@
       state: started
       enabled: yes
 
-  - name: Add the configuration agama for agama
-    copy:
-      src: /home/aleksandr/ansible/ica0002/roles/uwsgi/files/agama.ini
+  - name: Copy the uwsgi config file
+    template:
+      src: ../templates/agama.ini
       dest: /etc/uwsgi/apps-enabled/agama.ini
     notify: Restart uwsgi

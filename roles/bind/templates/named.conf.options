@@ -5,7 +5,7 @@ options {
 	    {{ i }};
       {% endfor %}
 	};
-      allow-query {127.0.0.1; 192.168.42.0/24;};
+      allow-query {127.0.0.0/8; 192.168.42.0/24;};
 	dnssec-validation no;
 	auth-nxdomain no;
 };

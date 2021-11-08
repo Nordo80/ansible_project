@@ -1,10 +1,17 @@
 ---
+  - name: Init
+    hosts:
+      - db_servers
+      - web_servers
+    become: yes
+    roles:
+      - init
+
   - name: Database server
     hosts: db_servers
     roles:
       - mysql
     become: yes
-    no_log: yes
 
   - name: Web app
     hosts: web_servers
@@ -12,5 +19,25 @@
       - agama
       - uwsgi
       - nginx
+      - node_explorter
     become: yes
+
+  - name: Bind server
+    hosts: bind_servers
+    roles:
+      - bind
+    become: yes
+
+  - name: Dns server
+    hosts: dns_servers
+    roles:
+      - dns
+      - init
+    become: yes
+
+  - name: Install Node Exporters
+    hosts: prometheus
+    become: yes
+    roles:
+      - prometheus
 

@@ -18,7 +18,7 @@
   copy:
     src: ../files/override.cnf
     dest: /etc/mysql/mysql.conf.d/override.cnf
-  notify: restart mysql
+  notify: Restart mysql
 
 - name: MySQL database 
   mysql_db:

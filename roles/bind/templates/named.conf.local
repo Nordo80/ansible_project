@@ -1,6 +1,4 @@
-zone "efiffel.ttu" {
+zone "{{ domain_name }}" {
   type primary;
-  file "/etc/bind/db.efiffel.ttu";
+  file "/etc/bind/db.{{ domain_name }}";
 };
-
-
