@@ -19,7 +19,7 @@
       - agama
       - uwsgi
       - nginx
-      - node_explorter
+      - node_exporter
     become: yes
 
   - name: Bind server
