@@ -1,12 +1,4 @@
 ---
-  - name: Init
-    hosts:
-      - db_servers
-      - web_servers
-    become: yes
-    roles:
-      - init
-
   - name: Database server
     hosts: db_servers
     roles:
@@ -18,9 +10,13 @@
     roles:
       - agama
       - uwsgi
-      - nginx
-      - node_exporter
     become: yes
+
+  - name: Nginx all VMS
+    hosts: all
+    become: yes
+    roles:
+      - nginx
 
   - name: Bind server
     hosts: bind_servers
@@ -36,6 +32,12 @@
     become: yes
 
   - name: Install Node Exporters
+    hosts: all
+    become: yes
+    roles:
+      - node_exporter
+
+  - name: Install Prometheus
     hosts: prometheus
     become: yes
     roles:

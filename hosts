@@ -1,5 +1,5 @@
-Nordo80-1 ansible_host=193.40.156.86 ansible_port=13522 ansible_ssh_user=ubuntu
-Nordo80-2 ansible_host=193.40.156.86 ansible_port=3522 ansible_ssh_user=ubuntu
+Nordo80-1 ansible_host=193.40.156.86 ansible_port=16622 ansible_ssh_user=ubuntu
+Nordo80-2 ansible_host=193.40.156.86 ansible_port=17922 ansible_ssh_user=ubuntu
 
 [dns_servers]
 Nordo80-1
@@ -12,7 +12,6 @@ Nordo80-2
 
 [web_servers]
 Nordo80-1
-Nordo80-2
 
 [prometheus]
 Nordo80-1

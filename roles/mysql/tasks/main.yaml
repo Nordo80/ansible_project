@@ -1,34 +1,35 @@
-- name: Install Pymsql
-  apt:
-    pkg: 
-    - python3-pymysql
+---
+  - name: Install mysql server
+    apt:
+      name: mysql-server
+      update_cache: yes
+  
+  - name: Install pymysql
+    apt:
+      name: python3-pymysql
+      update_cache: yes
 
-- name: Install mysql server
-  apt:
-    name: mysql-server
-    update_cache: yes
-     
-- name: Start mysql server
-  service:
-    name: mysql
-    state: started
-    enabled: yes
+  - name: Start mysql server
+    service:
+      name: mysql
+      state: started
+      enabled: yes
 
-- name: Copy mysql config and restart mysql server
-  copy:
-    src: ../files/override.cnf
-    dest: /etc/mysql/mysql.conf.d/override.cnf
-  notify: Restart mysql
+  - name: Copy mysql config and restart mysql server
+    copy:
+      src: override.cnf
+      dest: /etc/mysql/mysql.conf.d/override.cnf
+    notify: Restart mysql
 
-- name: MySQL database 
-  mysql_db:
-    name: "{{ mysql_database }}"
-    login_unix_socket: /var/run/mysqld/mysqld.sock  
+  - name: MySQL database 
+    community.mysql.mysql_db:
+      name: "{{ mysql_database }}"
+      login_unix_socket: /var/run/mysqld/mysqld.sock  
 
-- name: Create database user with privileges
-  mysql_user:
-    name: "{{ mysql_user }}"
-    host: "%"
-    password: "{{ mysql_password }}"
-    priv: '{{ mysql_database }}.*:ALL'
-    login_unix_socket: /var/run/mysqld/mysqld.sock
+  - name: Create database user with privileges
+    community.mysql.mysql_user:
+      name: "{{ mysql_user }}"
+      host: "%"
+      password: "{{ mysql_password }}"
+      priv: "{{ mysql_database }}.*:ALL"
+      login_unix_socket: /var/run/mysqld/mysqld.sock
