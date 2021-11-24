@@ -15,3 +15,21 @@ scrape_configs:
       - targets:
         {% for vm in groups['all'] %}- {{ vm }}:9100
         {% endfor %}
+
+  - job_name: 'bind'
+    static_configs:
+      - targets:
+        {% for vm in groups['bind_servers'] %}- {{ vm }}:9119
+        {% endfor %}
+
+  - job_name: 'mysql'
+    static_configs:
+      - targets:
+        {% for vm in groups['db_servers'] %}- {{ vm }}:9104
+        {% endfor %}
+      
+  - job_name: 'nginx'
+    static_configs:
+      - targets:
+        {% for vm in groups['all'] %}- {{ vm }}:9113
+        {% endfor %}

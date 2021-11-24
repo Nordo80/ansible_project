@@ -1,5 +1,5 @@
 ---
-  - name: Database server
+  - name: Database servers
     hosts: db_servers
     roles:
       - mysql
@@ -17,11 +17,13 @@
     become: yes
     roles:
       - nginx
+      - nginx_exporter
 
   - name: Bind server
     hosts: bind_servers
     roles:
       - bind
+      - bind_exporter
     become: yes
 
   - name: Dns server
@@ -42,4 +44,17 @@
     become: yes
     roles:
       - prometheus
+  
+  - name: Database server 2
+    hosts: db_servers
+    roles:
+      - mysql_exporter
+    become: yes
+   
+  - name: grafana
+    hosts: 
+      - grafana
+    become: yes
+    roles:
+      - grafana
 

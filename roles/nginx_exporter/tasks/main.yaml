@@ -1,0 +1,17 @@
+---
+  - name: Install Nginx exporter
+    apt:
+      name: prometheus-nginx-exporter
+      state: latest
+
+  - name: Enable nginx-exporter
+    service:
+      name: prometheus-nginx-exporter
+      state: started
+      enabled: yes
+    
+  - name: Copy exporter config
+    template:
+      src: exporter.j2
+      dest: /etc/nginx/sites-enabled/exporter
+    notify: Restart nginx exporter
