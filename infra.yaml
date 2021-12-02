@@ -58,3 +58,24 @@
     roles:
       - grafana
 
+  - name: Install InfluxDB and setup Telegraph
+    hosts: 
+      - influxdb
+    become: yes
+    roles:
+      - influxdb
+      - influxdb_exporter
+
+  - name: Rsyslog configuration
+    hosts: all
+    become: yes
+    roles:
+      - rsyslog
+
+  - name: Pinger script setup
+    hosts: 
+      - pinger
+    become: yes
+    roles:
+      - pinger
+

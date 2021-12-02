@@ -16,8 +16,8 @@ dns_forwarders:
   - 9.9.9.10
 local_network: 192.168.42.0/24
 localhost: 127.0.0.0/8
-vm1_ip: 192.168.42.99
-vm2_ip: 192.168.42.167
+vm1_ip: 192.168.42.134
+vm2_ip: 192.168.42.72
 domain_name: efiffel.ttu
 vm1: Nordo80-1
 vm2: Nordo80-2

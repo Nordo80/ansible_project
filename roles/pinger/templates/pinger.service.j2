@@ -1,0 +1,11 @@
+[Unit]
+Description=Pinger service reporting connection latency
+After=network.target
+Documentation=https://github.com/romankuchin/ica0002-2021/blob/main/08-logging/README.md
+
+[Service]
+User=pinger
+ExecStart=/usr/local/bin/pinger $ARGS
+
+[Install]
+WantedBy=multi-user.target

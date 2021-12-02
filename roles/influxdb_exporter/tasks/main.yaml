@@ -1,0 +1,20 @@
+---
+  - name: Download influxdb stats exporter
+    get_url:
+      url: https://github.com/carlpett/influxdb_stats_exporter/releases/download/v0.1.1/influx_stats_exporter_linux_amd64
+      dest: /usr/local/bin/influxdb_stats_exporter
+      mode: 0555
+
+  - name: Change config for influxdb stats exporter service
+    template:
+      src: prometheus-influxdb-stats-exporter.service.j2
+      dest: /etc/systemd/system/prometheus-influxdb-stats-exporter.service
+    notify:
+      - Reload systemd
+      - Restart influxdb exporter
+  
+  - name: Start influxdb stats exporter service
+    service: 
+      name: prometheus-influxdb-stats-exporter.service
+      state: started
+      enabled: yes
