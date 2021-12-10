@@ -2,9 +2,38 @@
   - name: Create a login user
     ansible.builtin.user:   
       name: backup
-      state: present
-      createhome: yes
       home: /home/backup
+      shell: /bin/bash
       generate_ssh_key: yes
       ssh_key_bits: 2048
-      ssh_key_file: /home/backup/.ssh/id_rsa
+
+  - name: Re-create .ssh
+    ansible.builtin.file:
+      path: /home/backup/.ssh
+      state: directory
+      owner: backup
+      group: backup
+      mode: '0755'
+
+  - name: Re-create restore
+    ansible.builtin.file:
+      path: /home/backup/restore
+      state: directory
+      owner: backup
+      group: backup
+      mode: '0644'
+
+  - name: Install duplicity
+    apt:
+      name: duplicity
+      state: latest
+
+  - name: Change known hosts
+    template:
+      owner: root
+      group: root
+      mode: '0755'
+      src: known_hosts.j2
+      dest: /home/backup/.ssh/known_hosts
+
+

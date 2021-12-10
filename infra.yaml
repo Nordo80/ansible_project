@@ -3,6 +3,7 @@
     hosts: db_servers
     roles:
       - mysql
+      - mysql_backup
     become: yes
 
   - name: Web app
@@ -65,6 +66,7 @@
     roles:
       - influxdb
       - influxdb_exporter
+      - influxdb_backup
 
   - name: Rsyslog configuration
     hosts: all
@@ -84,4 +86,16 @@
     become: yes
     roles:
       - backup
+
+  - name: Backup mysql
+    hosts: mysql_servers
+    become: yes
+    roles:
+      - mysql_backup
+
+  - name: Backup mysql
+    hosts: influxdb_servers
+    become: yes
+    roles:
+      - influxdb_backup
 

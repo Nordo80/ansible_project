@@ -1,5 +1,5 @@
-Nordo80-1 ansible_host=193.40.156.86 ansible_port=11922 ansible_ssh_user=ubuntu
-Nordo80-2 ansible_host=193.40.156.86 ansible_port=2322 ansible_ssh_user=ubuntu
+Nordo80-1 ansible_host=193.40.156.86 ansible_port=5922 ansible_ssh_user=ubuntu
+Nordo80-2 ansible_host=193.40.156.86 ansible_port=7422 ansible_ssh_user=ubuntu
 
 [dns_servers]
 Nordo80-1
@@ -27,5 +27,9 @@ Nordo80-1
 
 [pinger]
 Nordo80-1
+
+[mysql_servers]
+
+[influxdb_servers]
 
 
