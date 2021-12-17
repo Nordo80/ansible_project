@@ -1,5 +1,5 @@
 # Backup coverage
-Backup covers - **Nginx** services and **Mysql** database
+Backup covers - **Nginx** services and **Mysql** database (update)
 
 # RPO (recovery point objective)
 Cases - hours
