@@ -86,16 +86,3 @@
     become: yes
     roles:
       - backup
-
-  - name: Backup mysql
-    hosts: mysql_servers
-    become: yes
-    roles:
-      - mysql_backup
-
-  - name: Backup mysql
-    hosts: influxdb_servers
-    become: yes
-    roles:
-      - influxdb_backup
-

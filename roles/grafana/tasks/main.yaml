@@ -48,4 +48,10 @@
       src: main.json
       dest: /etc/grafana/provisioning/dashboards/main.json
     notify: Restart Grafana
+
+  - name: mysql dashboards
+    copy:
+      src: mysql.json
+      dest: /etc/grafana/provisioning/dashboards/mysql.json
+    notify: Restart Grafana
     

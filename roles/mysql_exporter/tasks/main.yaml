@@ -18,6 +18,12 @@
       dest: /var/lib/prometheus/.my.cnf
     notify: Restart mysqld exporter
 
+  - name: Prometheus mysqld exporter template
+    template:
+      src: prometheus-mysqld-exporter.j2
+      dest: /etc/default/prometheus-mysqld-exporter
+    notify: Restart mysqld exporter
+
   - name: sleep 10 sec
     pause:
       seconds: 10
