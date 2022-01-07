@@ -39,3 +39,6 @@
     notify: 
       - Reload systemd
       - Restart pinger
+
+  - name: Execute handlers
+    meta: flush_handlers

@@ -1,0 +1,25 @@
+---
+  - name: Add the user agama
+    ansible.builtin.user:
+      name: agama
+      shell: /bin/bash
+
+  - name: Install agama dependecies
+    apt:
+        name: 
+          - python3-flask-sqlalchemy
+          - python3-pymysql
+        state: latest
+        update_cache: yes
+
+  - name: Create install directory
+    file:
+      state: directory
+      path: /opt/agama
+      owner: agama
+      mode: 0755
+
+  - name: Download agama.py
+    get_url:
+      url: https://raw.githubusercontent.com/hudolejev/agama/master/agama.py
+      dest: /opt/agama

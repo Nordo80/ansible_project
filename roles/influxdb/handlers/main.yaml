@@ -4,3 +4,9 @@
       name: telegraf
       state: restarted
       enabled: yes
+
+  - name: Restart influxdb
+    service:
+      name: influxdb
+      state: restarted
+      enabled: yes

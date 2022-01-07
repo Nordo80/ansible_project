@@ -16,13 +16,13 @@ dns_forwarders:
   - 9.9.9.10
 local_network: 192.168.42.0/24
 localhost: 127.0.0.0/8
-vm1_ip: 192.168.42.152
-vm2_ip: 192.168.42.161
+vm1_ip: 192.168.42.81
+vm2_ip: 192.168.42.61
 domain_name: efiffel.ttu
 vm1: Nordo80-1
 vm2: Nordo80-2
-machine_ip: 193.40.156.86
-grafana_pass: !vault |
+machine_ip: 193.40.156.67
+grafana_password: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           65363262383232643234646337383330633063613036386331616336326233653833663466363063
           3037356133333338366332376238656534333732323061310a333161383930323030653633383039
@@ -57,3 +57,5 @@ mysql_replication_pass: !vault |
           3430323164356439340a336330643264323033343432653935316164663961393737613235343639
           3238
 node_id: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'].split('.')[-1] }}"
+grafana_port: 3001
+agama_port: 8001

@@ -1,0 +1,23 @@
+   apiVersion: 1
+
+   deleteDatasources:
+     - name: Prometheus
+       orgId: 1
+
+   datasources:
+   - name: Prometheus
+     type: prometheus
+     access: proxy
+     orgId: 1
+     url: http://{{ ansible_host }}:{{ hostvars['Nordo80-1'].ansible_port + 58 }}/prometheus
+     password:
+     user:
+     database:
+     basicAuth: false
+     basicAuthUser:
+     basicAuthPassword:
+     withCredentials:
+     isDefault: true
+
+     version: 1
+     editable: true

@@ -1,57 +1,53 @@
 ---
-  - name: Add a key
-    apt_key:
-      url: https://packages.grafana.com/gpg.key
+  - name: Create grafana directories
+    file:
+      path: /opt/grafana/provisioning/{{ item }}
+      state: directory
+      recurse: yes
+    loop: 
+      - dashboards
+      - datasources
 
-  - name: Install tools for Grafana
-    apt:
-      name: apt-transport-https
-      state: latest
-
-  - name: Add Grafana repository
-    apt_repository:
-      filename: grafana
-      repo: deb https://packages.grafana.com/oss/deb stable main
-
-  - name: Install Grafana
-    apt:
-      name: grafana
-      state: latest
-    notify: Reset Grafana password
-
-  - name: Start grafana
-    service:
-        name: grafana-server
-        state: started
-        enabled: yes
-
-  - name: Reconfigure Grafana
+  - name: Put telegraf.yaml to datasources
     template:
-      src: grafana.ini.j2
-      dest: /etc/grafana/grafana.ini
-    notify: Restart Grafana
+      src: telegraf.yaml.j2
+      dest: /opt/grafana/provisioning/datasources/telegraf.yaml
 
-  - name: Datasource sample
+  - name: Put influxdb.yaml to datasources
     template:
-      src: sample.yaml.j2
-      dest: /etc/grafana/provisioning/datasources/sample.yaml
-    notify: Restart Grafana
-  
-  - name: Dashboard template
+      src: influx.yaml.j2
+      dest: /opt/grafana/provisioning/datasources/influx.yaml
+
+  - name: Put prometheus.yaml to datasources
+    template:
+      src: prometheus.yaml.j2
+      dest: /opt/grafana/provisioning/datasources/prometheus.yaml
+
+  - name: Put dashboard.yaml to dashboards
     template:
       src: dashboard.yaml.j2
-      dest: /etc/grafana/provisioning/dashboards/sample.yaml
-    notify: Restart Grafana
+      dest: /opt/grafana/provisioning/dashboards/dashboard.yaml
 
-  - name: Setup dashboards
+  - name: Put dashboard files to dashboards
     copy:
-      src: main.json
-      dest: /etc/grafana/provisioning/dashboards/main.json
-    notify: Restart Grafana
+      src: "{{ item }}"
+      dest: "/opt/grafana/provisioning/dashboards/{{ item }}"
+    loop: 
+      - main.json
+      - mysql.json
+      - syslog.json
 
-  - name: mysql dashboards
-    copy:
-      src: mysql.json
-      dest: /etc/grafana/provisioning/dashboards/mysql.json
-    notify: Restart Grafana
-    
+  - name: Put grafana config
+    template:
+      src: grafana.ini.j2
+      dest: /opt/grafana/grafana.ini
+    no_log: true
+
+  - name: Install and start the grafana in the docker
+    community.docker.docker_container:
+      name: grafana
+      image: grafana/grafana
+      container_default_behavior: no_defaults
+      published_ports: "{{ grafana_port }}:3000"
+      restart_policy: always
+      volumes: /opt/grafana:/etc/grafana

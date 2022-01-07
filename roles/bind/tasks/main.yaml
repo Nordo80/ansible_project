@@ -11,13 +11,13 @@
 
 - name: Copy named config file
   template:
-    src: ../templates/named.conf.options
+    src: ../templates/named.conf.options.j2
     dest: /etc/bind/named.conf.options
   notify: restart bind9
 
 - name: Copy named conf local file
   template:
-    src: ../templates/named.conf.local
+    src: ../templates/named.conf.local.j2
     dest: /etc/bind/named.conf.local     
   notify: restart bind9
 
