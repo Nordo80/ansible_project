@@ -21,12 +21,6 @@
     dest: /etc/bind/named.conf.local     
   notify: restart bind9
 
-- name: Copy the resolv file
-  template:
-    src: ../templates/resolv.conf
-    dest: /etc/resolv.conf
-  notify: restart bind9
-
 - name: Copy the template
   template:
     src: ../templates/db.example

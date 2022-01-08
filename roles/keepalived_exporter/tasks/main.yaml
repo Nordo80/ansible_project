@@ -1,0 +1,19 @@
+---
+  - name: Copy keepalived exporter binary
+    copy:
+      src: keepalived_exporter
+      dest: /usr/local/bin/keepalived_exporter
+      mode: a+x
+
+  - name: Create service
+    copy:
+      src: keepalived-exporter.service
+      dest: /etc/systemd/system/keepalived_exporter.service
+    notify:
+      - Reload systemd
+
+  - name: Start keepalived exporter
+    service:
+      name: keepalived_exporter
+      state: started
+      enabled: yes
