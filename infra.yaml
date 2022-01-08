@@ -67,6 +67,8 @@
     become: yes
     roles:
       - grafana
+    tags:
+      - gr
 
   - name: Install InfluxDB and setup Telegraph
     hosts: 
