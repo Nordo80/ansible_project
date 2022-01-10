@@ -10,7 +10,7 @@
       dest: /etc/prometheus/prometheus.yml
     notify: 
       - Restart Prometheus
-      - restart Nginx
+      - Restart Nginx
     become: yes
 
   - name: Make prometheus available
@@ -19,5 +19,5 @@
       dest: /etc/default/prometheus
     notify: 
       - Restart Prometheus
-      - restart Nginx
+      - Restart Nginx
     become: yes

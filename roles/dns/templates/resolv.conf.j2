@@ -1,15 +1,7 @@
-$TTL	604800
-{{ domain_name }}.	IN	SOA	{{ vm2 }}.{{ domain_name }}. root.{{ domain_name }}. (
-			      2		; Serial
-			 604800		; Refresh
-			  86400		; Retry
-			2419200		; Expire
-			 604800 	; Negative Cache TTL
-);
-{% for vm in groups['bind_servers'] %}
-{{ domain_name }}.	IN	NS	{{ vm }}
+search {{ domain_name }}
+{% for vm in groups['dns_master'] %}
+nameserver {{ hostvars[vm]['ansible_default_ipv4']['address'] }}
 {% endfor %}
-
-{% for vm in groups['all'] %}
-{{ vm }}	IN	A	{{ hostvars[vm]['ansible_default_ipv4']['address'] }}
+{% for vm in groups['dns_slaves'] %}
+nameserver {{ hostvars[vm]['ansible_default_ipv4']['address'] }}
 {% endfor %}
