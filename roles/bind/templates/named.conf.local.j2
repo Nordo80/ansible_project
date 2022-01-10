@@ -1,4 +1,37 @@
 zone "{{ domain_name }}" {
-  type primary;
-  file "/etc/bind/db.{{ domain_name }}";
+{% if inventory_hostname in groups['dns_master'] %}
+    type master;
+    allow-transfer {127.0.0.1;
+    {{ hostvars[groups['dns_slaves'][0]]['ansible_default_ipv4']['address'] }};
+     key dns_transfer_key; };
+    allow-update {127.0.0.1; key dns_update_key; };
+
+{% else %}
+    type slave;
+    masters { {{ hostvars[groups['dns_master'][0]]['ansible_default_ipv4']['address'] }}; };
+{% endif %}
+    file "db.{{ domain_name }}";
+};
+
+{% if inventory_hostname in groups['dns_slaves'] %}
+{% for vm in groups['dns_master'] %}
+server {{ hostvars[vm]['ansible_default_ipv4']['address'] }} {
+    keys {dns_transfer_key; };
+};
+{% endfor %}
+{% endif %}
+
+zone "{{ reverse_domain }}" {
+{% if inventory_hostname in groups['dns_master'] %}
+    type master;
+    allow-transfer {127.0.0.1;
+    {{ hostvars[groups['dns_slaves'][0]]['ansible_default_ipv4']['address'] }};
+     key dns_transfer_key; };
+    allow-update {127.0.0.1; key dns_update_key; };
+
+{% else %}
+    type slave;
+    masters { {{ hostvars[groups['dns_master'][0]]['ansible_default_ipv4']['address'] }}; };
+{% endif %}
+    file "db.efiffel.reversed";
 };

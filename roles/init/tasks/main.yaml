@@ -1,5 +1,9 @@
 ---
-  - setup:
-  - apt:
-      update_cache: yes
-      cache_valid_time: "86400"
+  - name: Update APT cache
+    apt:
+      cache_valid_time: 86400
+
+  - name: Set hostname
+    hostname:
+      name: "{{ inventory_hostname }}"
+      use: debian

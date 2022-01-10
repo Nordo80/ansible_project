@@ -1,10 +1,10 @@
 ---
   - name: Init
-    hosts: All
+    hosts: all
     roles:
       - init
-    become: yes
 
+    become: yes
   - name: Bind server
     hosts: bind_servers
     roles:

@@ -1,28 +1,81 @@
 ---
-- name: Install bind
-  apt:
-    name: bind9 
-    update_cache: yes
+  - name: Install bind
+    apt:
+      name: bind9 
+      update_cache: yes
 
-- name: Start service bind9
-  service:
-    name: bind9
-    state: started
+  - name: Start service bind9
+    service:
+      name: bind9
+      state: started
 
-- name: Copy named config file
-  template:
-    src: ../templates/named.conf.options.j2
-    dest: /etc/bind/named.conf.options
-  notify: restart bind9
+  - name: Install dnspython
+    apt:
+      name: python3-dnspython
 
-- name: Copy named conf local file
-  template:
-    src: ../templates/named.conf.local.j2
-    dest: /etc/bind/named.conf.local     
-  notify: restart bind9
+  - name: Copy named config file
+    template:
+      src: ../templates/named.conf.options.j2
+      dest: /etc/bind/named.conf.options
+    notify: 
+      - Restart bind9
+    no_log: true
 
-- name: Copy the template
-  template:
-    src: ../templates/db.example
-    dest: /etc/bind/db.efiffel.ttu
-  notify: restart bind9
+  - name: Copy the template of my database
+    when: inventory_hostname in groups['dns_master']
+    template: 
+      src: db.example.j2
+      dest: /var/cache/bind/db.efiffel.ttu
+      force: no
+    notify: 
+      - Restart rndc
+
+  - name: Copy reversed conf file
+    when: inventory_hostname in groups['dns_master']
+    template:
+      src: db.efiffel.reversed.j2
+      dest: /var/cache/bind/db.efiffel.reversed
+      force: no
+    notify: Restart rndc
+
+  - name: Copy named conf local file
+    template:
+      src: ../templates/named.conf.local.j2
+      dest: /etc/bind/named.conf.local     
+    notify:
+      - Restart bind9
+
+  - name: Execute handlers
+    meta: flush_handlers
+
+  - name: Add backup server A record
+    when: inventory_hostname == groups['dns_master'][0]
+    community.general.nsupdate:
+      key_name: "dns_update_key"
+      key_algorithm: "hmac-sha256"
+      key_secret: "{{ dns_update_key }}"
+      server: "localhost"
+      zone: "{{ domain_name }}."
+      record: "backup"
+      type: "A"
+      value: "{{ backup_ip }}"
+    notify:
+      - Restart bind9
+    no_log: false
+
+  - name: Add additional CNAME records
+    when: inventory_hostname == groups['dns_master'][0]
+    community.general.nsupdate:
+      key_name: "dns_update_key"
+      key_algorithm: "hmac-sha256"
+      key_secret: "{{ dns_update_key }}"
+      server: "localhost"
+      zone: "{{ domain_name }}."
+      record: "{{ item.key }}.{{ domain_name }}."
+      type: "CNAME"
+      value: "{{ item.value }}.{{ domain_name }}."
+    notify:
+      - Restart bind9
+    loop: "{{ cname_records | dict2items }}"
+    no_log: true
+

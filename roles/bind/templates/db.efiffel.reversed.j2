@@ -1,0 +1,15 @@
+$TTL	604800
+{{ reverse_domain }}.  IN	SOA	{{ vm2 }}.{{ domain_name }}. root.{{ domain_name }}. (
+			      2		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 	; Negative Cache TTL
+);
+{% for vm in groups['bind_servers'] %}
+{{ reverse_domain }}.	IN	NS	{{ vm }}.{{ domain_name }}.
+{% endfor %}
+
+{% for vm in groups['all'] %}
+{{ hostvars[vm]['ansible_default_ipv4']['address'].split('.')[-1] }} IN PTR {{ vm }}.{{ domain_name }}.
+{% endfor %}

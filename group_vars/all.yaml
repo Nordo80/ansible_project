@@ -16,9 +16,11 @@ dns_forwarders:
   - 9.9.9.10
 local_network: 192.168.42.0/24
 localhost: 127.0.0.0/8
-vm1_ip: 192.168.42.197
-vm2_ip: 192.168.42.130
+docker_network: 172.17.0.0/16
+vm1_ip: 192.168.42.162
+vm2_ip: 192.168.42.137
 domain_name: efiffel.ttu
+reverse_domain: 42.168.192.in-addr.arpa
 vm1: Nordo80-1
 vm2: Nordo80-2
 machine_ip: 193.40.156.67
@@ -60,3 +62,18 @@ node_id: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'].spl
 grafana_port: 3001
 agama_port: 8001
 agama_port2: 8002
+dns_transfer_key: 2ixVaa3Y24nzNVA27w315jE4ZwKH9ZXpC8ArqWvR5mA=
+dns_update_key: 2ixVaa3Y24nzNVA27w315jE4ZwKH9ZXpC8ArqWvR5mA=
+
+cname_records:
+    grafana: "{{ groups['grafana'][0] }}"
+    influxdb: "{{ groups['influxdb'][0] }}"
+    lb1: "{{ groups['keepalived'][0] }}"
+    lb2: "{{ groups['keepalived'][1] }}"
+    mysql1: "{{ groups['db_servers'][0] }}"
+    mysql2: "{{ groups['db_servers'][1] }}"
+    ns1: "{{ groups['bind_servers'][0] }}"
+    ns2: "{{ groups['bind_servers'][1] }}"
+    prometheus: "{{ groups['prometheus'][0] }}"
+    web1: "{{ groups['web_servers'][0] }}"
+    web2: "{{ groups['web_servers'][1] }}"
