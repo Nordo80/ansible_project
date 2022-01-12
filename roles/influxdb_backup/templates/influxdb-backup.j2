@@ -1,3 +1,3 @@
-* 12 * * 3  backup rm -rf /home/backup/influxdb/*; influxd backup -portable -database telegraf /home/backup/influxdb
-30 12 * * *  backup  duplicity --no-encryption full /home/backup/influxdb/ rsync://Nordo80@backup.{{ domain_name }}//home/Nordo80/
-* 18 * * *  backup  duplicity --no-encryption incremental /home/backup/influxdb/ rsync://Nordo80@backup.{{ domain_name }}//home/Nordo80/
+00 02 * * *  backup rm -rf /home/backup/influxdb/*; influxd backup -portable -database telegraf /home/backup/influxdb
+20 02 * * 6  backup  duplicity --no-encryption full /home/backup/influxdb/ rsync://Nordo80@backup.{{ domain_name }}//home/Nordo80/influxdb
+45 02 * * *  backup  duplicity --no-encryption incremental /home/backup/influxdb/ rsync://Nordo80@backup.{{ domain_name }}//home/Nordo80/influxdb

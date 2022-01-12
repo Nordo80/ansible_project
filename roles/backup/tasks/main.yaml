@@ -17,8 +17,6 @@
   - name: put known hosts
     template:
       owner: backup
-      group: backup
-      mode: 0755
       src: known_hosts.j2
       dest: /home/backup/.ssh/known_hosts
 

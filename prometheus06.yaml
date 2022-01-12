@@ -1,5 +1,0 @@
-- name: Install Node Exporters
-  hosts: web_servers 
-  become: yes
-  roles:
-    - prometheus

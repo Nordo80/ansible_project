@@ -1,1 +1,6 @@
-mjau
+CPU#  100 - (avg by (instance) (irate(node_cpu_seconds_total{mode="idle"}[30m])) * 100)
+
+NGINX# rate(nginx_http_requests_total[5m])
+
+BIND# rate(bind_resolver_queries_total{type="A"}[30m])
+bind_up

@@ -40,7 +40,7 @@
       state: started
       enabled: yes
 
-  - name: Start service Influxdb
+  - name: Start service Telegraf
     service:
       name: telegraf
       state: started

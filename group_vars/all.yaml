@@ -22,7 +22,6 @@ reverse_domain: 42.168.192.in-addr.arpa
 vm1: Nordo80-1
 vm2: Nordo80-2
 vm3: Nordo80-3
-machine_ip: 193.40.156.67
 grafana_password: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           65363262383232643234646337383330633063613036386331616336326233653833663466363063

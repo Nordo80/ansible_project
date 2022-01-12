@@ -27,7 +27,6 @@
   - name: sleep 10 sec
     pause:
       seconds: 10
-    #when: prom_exporter_installed.changed
 
   - name: Start mysql exporter
     service:

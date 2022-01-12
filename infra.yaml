@@ -3,6 +3,8 @@
     hosts: all
     roles:
       - init
+    tags:
+      init
 
     become: yes
   - name: Bind server
@@ -11,12 +13,16 @@
       - bind
       - bind_exporter
     become: yes
+    tags:
+      bind
 
   - name: Resolv
     hosts: resolv
     roles:
       - dns
     become: yes
+    tags:
+      reso
 
   - name: Database servers
     hosts: db_servers
@@ -25,13 +31,15 @@
       - mysql_backup
     become: yes
     tags:
-      - al
+      - dbmy
 
   - name: fix docker
     hosts: all 
     become: yes
     roles:
       - docker_fix
+    tags:
+      docker
 
   - name: Docker
     hosts: all 
@@ -39,6 +47,8 @@
     roles:
       - docker
       - agama
+    tags:
+      docker
 
   - name: Nginx all VMS
     hosts: all
@@ -54,18 +64,25 @@
     become: yes
     roles:
       - node_exporter
+    tags:
+      - node
+      
 
   - name: Install Prometheus
     hosts: prometheus
     become: yes
     roles:
       - prometheus
+    tags:
+      - pro
   
   - name: Database server 2
     hosts: db_servers
     roles:
       - mysql_exporter
     become: yes
+    tags:
+      - myexp
    
   - name: grafana
     hosts: 
@@ -84,12 +101,16 @@
       - influxdb
       - influxdb_exporter
       - influxdb_backup
+    tags:
+      - tele
 
   - name: Rsyslog configuration
     hosts: all
     become: yes
     roles:
       - rsyslog
+    tags:
+      - rsy
 
   - name: Pinger script setup
     hosts: 
@@ -97,6 +118,8 @@
     become: yes
     roles:
       - pinger
+    tags:
+      - ping
   
   - name: Backup
     hosts: all
@@ -111,6 +134,8 @@
     roles:
       - keepalived
       - keepalived_exporter
+    tags:
+      - keep
 
   - name: haproxy
     hosts:
@@ -120,5 +145,5 @@
       - haproxy
       - haproxy_exporter
     tags:
-      - al
+      - ha
 

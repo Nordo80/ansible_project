@@ -61,7 +61,7 @@
       value: "{{ backup_ip }}"
     notify:
       - Restart bind9
-    no_log: false
+    no_log: true
 
   - name: Add additional CNAME records
     when: inventory_hostname == groups['dns_master'][0]
