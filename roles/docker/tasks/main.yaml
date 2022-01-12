@@ -11,3 +11,9 @@
       name: docker
       state: started
       enabled: yes
+
+  - name: Log into Dockerhub
+    community.docker.docker_login:
+      username: "{{ docker_user }}"
+      password: "{{ docker_password }}"
+    no_log: true
