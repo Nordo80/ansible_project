@@ -27,6 +27,12 @@
     tags:
       - al
 
+  - name: fix docker
+    hosts: all 
+    become: yes
+    roles:
+      - docker_fix
+
   - name: Docker
     hosts: all 
     become: yes
@@ -91,7 +97,7 @@
     become: yes
     roles:
       - pinger
-
+  
   - name: Backup
     hosts: all
     become: yes

@@ -26,3 +26,10 @@
     template:
       src: mysql-backup.j2
       dest: /etc/cron.d/mysql-backup
+
+  - name: Ensure that cron file is created
+    file:
+      path: /etc/cron.d/mysql-backup
+      owner: root
+      mode: '0755'
+      state: file

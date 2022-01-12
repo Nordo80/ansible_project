@@ -1,0 +1,16 @@
+---
+  - name: Install iptables-persistent
+    apt:
+      name: iptables-persistent
+      state: latest
+
+  - name: rule for docker
+    template:
+      src: rules.v4.j2
+      dest: /etc/iptables/rules.v4
+
+  - name: Restore iptables
+    community.general.iptables_state:
+      path: /etc/iptables/rules.v4
+      state: restored
+      table: mangle
