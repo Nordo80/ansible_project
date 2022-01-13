@@ -38,7 +38,7 @@ Checking restore results:
 
 #Restore MySQL agama data from the backup:
 Command to download the backup:
-!!!Must be run on managed host (Nordo80-1)!!!
+!!!Must be run on managed host (Nordo80-2)!!!
 1. Login as backup:
     su backup
 2. Run command:
@@ -47,7 +47,7 @@ Command to download the backup:
     duplicity --no-encryption incremental /home/backup/mysql/ rsync://Nordo80@backup.efiffel.ttu//home/Nordo80/mysql/
 
 Command to restore from backup:
-!!!Must be run on managed host (Nordo80-1)!!!
+!!!Must be run on managed host (Nordo80-2)!!!
 1. Login as root:
     sudo -i
 2. Run command:
