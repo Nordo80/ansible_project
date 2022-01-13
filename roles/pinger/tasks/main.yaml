@@ -42,3 +42,9 @@
 
   - name: Execute handlers
     meta: flush_handlers
+
+  - name: Start pinger
+    service:
+      name: pinger
+      state: started
+      enabled: yes
