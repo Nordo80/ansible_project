@@ -126,6 +126,8 @@
     become: yes
     roles:
       - backup
+    tags:
+      - backk
 
   - name: Keepalived
     hosts:
@@ -145,5 +147,5 @@
       - haproxy
       - haproxy_exporter
     tags:
-      - ha
+      - keep
 

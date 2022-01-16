@@ -1,4 +1,4 @@
-P jaan  16 13:35:11 EET 2022
+P jaan  16 14:45:07 EET 2022
 aleksandr-VirtualBox
 [DEPRECATION WARNING]: Ansible will require Python 3.8 or newer on the 
 controller starting with Ansible 2.12. Current version: 3.6.9 (default, Dec  8 
@@ -9,23 +9,16 @@ deprecation_warnings=False in ansible.cfg.
 PLAY [Init] ********************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [Nordo80-3]
-ok: [Nordo80-2]
 ok: [Nordo80-1]
+ok: [Nordo80-2]
+ok: [Nordo80-3]
 
 TASK [init : Update APT cache] *************************************************
-ok: [Nordo80-3]
-changed: [Nordo80-2]
 changed: [Nordo80-1]
+changed: [Nordo80-2]
+changed: [Nordo80-3]
 
 TASK [init : Set hostname] *****************************************************
---- before
-+++ after
-@@ -1 +1 @@
--hostname = nordo80-3
-+hostname = Nordo80-3
-
-changed: [Nordo80-3]
 --- before
 +++ after
 @@ -1 +1 @@
@@ -33,6 +26,13 @@ changed: [Nordo80-3]
 +hostname = Nordo80-2
 
 changed: [Nordo80-2]
+--- before
++++ after
+@@ -1 +1 @@
+-hostname = nordo80-3
++hostname = Nordo80-3
+
+changed: [Nordo80-3]
 --- before
 +++ after
 @@ -1 +1 @@
@@ -45,18 +45,10 @@ PLAY [Bind server] *************************************************************
 
 TASK [Gathering Facts] *********************************************************
 ok: [Nordo80-3]
-ok: [Nordo80-1]
 ok: [Nordo80-2]
+ok: [Nordo80-1]
 
 TASK [bind : Install bind] *****************************************************
-The following additional packages will be installed:
-  bind9-utils dns-root-data python3-ply
-Suggested packages:
-  bind-doc resolvconf python-ply-doc
-The following NEW packages will be installed:
-  bind9 bind9-utils dns-root-data python3-ply
-0 upgraded, 4 newly installed, 0 to remove and 70 not upgraded.
-changed: [Nordo80-3]
 The following additional packages will be installed:
   bind9-dnsutils bind9-libs bind9-utils dns-root-data python3-ply
 Suggested packages:
@@ -77,6 +69,16 @@ The following packages will be upgraded:
   bind9-dnsutils bind9-libs
 2 upgraded, 4 newly installed, 0 to remove and 140 not upgraded.
 changed: [Nordo80-1]
+The following additional packages will be installed:
+  bind9-dnsutils bind9-libs bind9-utils dns-root-data python3-ply
+Suggested packages:
+  bind-doc resolvconf python-ply-doc
+The following NEW packages will be installed:
+  bind9 bind9-utils dns-root-data python3-ply
+The following packages will be upgraded:
+  bind9-dnsutils bind9-libs
+2 upgraded, 4 newly installed, 0 to remove and 140 not upgraded.
+changed: [Nordo80-3]
 
 TASK [bind : Start service bind9] **********************************************
 ok: [Nordo80-2]
@@ -90,23 +92,23 @@ The following NEW packages will be installed:
 changed: [Nordo80-2]
 The following NEW packages will be installed:
   python3-dnspython
-0 upgraded, 1 newly installed, 0 to remove and 70 not upgraded.
-changed: [Nordo80-3]
+0 upgraded, 1 newly installed, 0 to remove and 140 not upgraded.
+changed: [Nordo80-1]
 The following NEW packages will be installed:
   python3-dnspython
 0 upgraded, 1 newly installed, 0 to remove and 140 not upgraded.
-changed: [Nordo80-1]
+changed: [Nordo80-3]
 
 TASK [bind : Copy named config file] *******************************************
-changed: [Nordo80-3]
-changed: [Nordo80-2]
 changed: [Nordo80-1]
+changed: [Nordo80-2]
+changed: [Nordo80-3]
 
 TASK [bind : Copy the template of my database] *********************************
 skipping: [Nordo80-1]
 skipping: [Nordo80-2]
 --- before
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmpmxs668ve/db.example.j2
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmpo1udbsmh/db.example.j2
 @@ -0,0 +1,15 @@
 +$TTL	604800
 +efiffel.ttu.	IN	SOA	Nordo80-2.efiffel.ttu. root.efiffel.ttu. (
@@ -120,9 +122,9 @@ skipping: [Nordo80-2]
 +efiffel.ttu.	IN	NS	Nordo80-1
 +efiffel.ttu.	IN	NS	Nordo80-2
 +
-+Nordo80-1	IN	A	192.168.42.19
-+Nordo80-2	IN	A	192.168.42.175
-+Nordo80-3	IN	A	192.168.42.165
++Nordo80-1	IN	A	192.168.42.89
++Nordo80-2	IN	A	192.168.42.193
++Nordo80-3	IN	A	192.168.42.108
 
 changed: [Nordo80-3]
 
@@ -130,7 +132,7 @@ TASK [bind : Copy reversed conf file] ******************************************
 skipping: [Nordo80-1]
 skipping: [Nordo80-2]
 --- before
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmpkdmqdiey/db.efiffel.reversed.j2
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmpyedn9dyh/db.efiffel.reversed.j2
 @@ -0,0 +1,15 @@
 +$TTL	604800
 +42.168.192.in-addr.arpa.  IN	SOA	Nordo80-2.efiffel.ttu. root.efiffel.ttu. (
@@ -144,15 +146,15 @@ skipping: [Nordo80-2]
 +42.168.192.in-addr.arpa.	IN	NS	Nordo80-1.efiffel.ttu.
 +42.168.192.in-addr.arpa.	IN	NS	Nordo80-2.efiffel.ttu.
 +
-+19 IN PTR Nordo80-1.efiffel.ttu.
-+175 IN PTR Nordo80-2.efiffel.ttu.
-+165 IN PTR Nordo80-3.efiffel.ttu.
++89 IN PTR Nordo80-1.efiffel.ttu.
++193 IN PTR Nordo80-2.efiffel.ttu.
++108 IN PTR Nordo80-3.efiffel.ttu.
 
 changed: [Nordo80-3]
 
 TASK [bind : Copy named conf local file] ***************************************
 --- before: /etc/bind/named.conf.local
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmpslh9zb2n/named.conf.local.j2
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmplirspaa0/named.conf.local.j2
 @@ -1,8 +1,20 @@
 -//
 -// Do any local configuration here
@@ -160,7 +162,7 @@ TASK [bind : Copy named conf local file] ***************************************
 +zone "efiffel.ttu" {
 +    type master;
 +    allow-transfer {127.0.0.1;
-+    192.168.42.19;
++    192.168.42.89;
 +     key dns_transfer_key; };
 +    allow-update {127.0.0.1; key dns_update_key; };
  
@@ -174,7 +176,7 @@ TASK [bind : Copy named conf local file] ***************************************
 +zone "42.168.192.in-addr.arpa" {
 +    type master;
 +    allow-transfer {127.0.0.1;
-+    192.168.42.19;
++    192.168.42.89;
 +     key dns_transfer_key; };
 +    allow-update {127.0.0.1; key dns_update_key; };
 +
@@ -183,64 +185,64 @@ TASK [bind : Copy named conf local file] ***************************************
 
 changed: [Nordo80-3]
 --- before: /etc/bind/named.conf.local
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmpkiwihmxv/named.conf.local.j2
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmpx_3nh8k2/named.conf.local.j2
 @@ -1,8 +1,15 @@
 -//
 -// Do any local configuration here
 -//
 +zone "efiffel.ttu" {
 +    type slave;
-+    masters { 192.168.42.165; };
++    masters { 192.168.42.108; };
 +    file "db.efiffel.ttu";
 +};
  
 -// Consider adding the 1918 zones here, if they are not used in your
 -// organization
 -//include "/etc/bind/zones.rfc1918";
-+server 192.168.42.165 {
++server 192.168.42.108 {
 +    keys {dns_transfer_key; };
 +};
  
 +zone "42.168.192.in-addr.arpa" {
 +    type slave;
-+    masters { 192.168.42.165; };
-+    file "db.efiffel.reversed";
-+};
-
-changed: [Nordo80-2]
---- before: /etc/bind/named.conf.local
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmp7wp2ojhc/named.conf.local.j2
-@@ -1,8 +1,15 @@
--//
--// Do any local configuration here
--//
-+zone "efiffel.ttu" {
-+    type slave;
-+    masters { 192.168.42.165; };
-+    file "db.efiffel.ttu";
-+};
- 
--// Consider adding the 1918 zones here, if they are not used in your
--// organization
--//include "/etc/bind/zones.rfc1918";
-+server 192.168.42.165 {
-+    keys {dns_transfer_key; };
-+};
- 
-+zone "42.168.192.in-addr.arpa" {
-+    type slave;
-+    masters { 192.168.42.165; };
++    masters { 192.168.42.108; };
 +    file "db.efiffel.reversed";
 +};
 
 changed: [Nordo80-1]
+--- before: /etc/bind/named.conf.local
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmpsrrjxqyx/named.conf.local.j2
+@@ -1,8 +1,15 @@
+-//
+-// Do any local configuration here
+-//
++zone "efiffel.ttu" {
++    type slave;
++    masters { 192.168.42.108; };
++    file "db.efiffel.ttu";
++};
+ 
+-// Consider adding the 1918 zones here, if they are not used in your
+-// organization
+-//include "/etc/bind/zones.rfc1918";
++server 192.168.42.108 {
++    keys {dns_transfer_key; };
++};
+ 
++zone "42.168.192.in-addr.arpa" {
++    type slave;
++    masters { 192.168.42.108; };
++    file "db.efiffel.reversed";
++};
+
+changed: [Nordo80-2]
 
 TASK [bind : Execute handlers] *************************************************
 
 RUNNING HANDLER [bind : Restart bind9] *****************************************
 changed: [Nordo80-3]
-changed: [Nordo80-2]
 changed: [Nordo80-1]
+changed: [Nordo80-2]
 
 RUNNING HANDLER [bind : Restart rndc] ******************************************
 changed: [Nordo80-3]
@@ -260,10 +262,10 @@ skipping: [Nordo80-1] => (item=None)
 skipping: [Nordo80-2] => (item=None) 
 skipping: [Nordo80-1] => (item=None) 
 skipping: [Nordo80-2] => (item=None) 
-skipping: [Nordo80-2] => (item=None) 
-skipping: [Nordo80-1] => (item=None) 
 skipping: [Nordo80-1] => (item=None) 
 skipping: [Nordo80-2] => (item=None) 
+skipping: [Nordo80-2] => (item=None) 
+skipping: [Nordo80-1] => (item=None) 
 skipping: [Nordo80-1] => (item=None) 
 skipping: [Nordo80-2] => (item=None) 
 skipping: [Nordo80-1] => (item=None) 
@@ -271,11 +273,11 @@ skipping: [Nordo80-2] => (item=None)
 skipping: [Nordo80-1] => (item=None) 
 skipping: [Nordo80-1]
 skipping: [Nordo80-2] => (item=None) 
+changed: [Nordo80-3] => (item=None)
 skipping: [Nordo80-2] => (item=None) 
 skipping: [Nordo80-2] => (item=None) 
 skipping: [Nordo80-2] => (item=None) 
 skipping: [Nordo80-2]
-changed: [Nordo80-3] => (item=None)
 changed: [Nordo80-3] => (item=None)
 changed: [Nordo80-3] => (item=None)
 changed: [Nordo80-3] => (item=None)
@@ -291,16 +293,16 @@ changed: [Nordo80-3]
 TASK [bind_exporter : Install bind exporter] ***********************************
 The following NEW packages will be installed:
   prometheus-bind-exporter
-0 upgraded, 1 newly installed, 0 to remove and 70 not upgraded.
+0 upgraded, 1 newly installed, 0 to remove and 140 not upgraded.
+changed: [Nordo80-1]
+The following NEW packages will be installed:
+  prometheus-bind-exporter
+0 upgraded, 1 newly installed, 0 to remove and 140 not upgraded.
 changed: [Nordo80-3]
 The following NEW packages will be installed:
   prometheus-bind-exporter
 0 upgraded, 1 newly installed, 0 to remove and 140 not upgraded.
 changed: [Nordo80-2]
-The following NEW packages will be installed:
-  prometheus-bind-exporter
-0 upgraded, 1 newly installed, 0 to remove and 140 not upgraded.
-changed: [Nordo80-1]
 
 TASK [bind_exporter : Enable bind exporter] ************************************
 ok: [Nordo80-3]
@@ -324,7 +326,7 @@ changed: [Nordo80-3]
 
 TASK [dns : copy resolv.conf] **************************************************
 --- before: /etc/resolv.conf
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmp5yobldxm/resolv.conf.j2
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmp977afosn/resolv.conf.j2
 @@ -1,19 +1,4 @@
 -# This file is managed by man:systemd-resolved(8). Do not edit.
 -#
@@ -346,13 +348,13 @@ TASK [dns : copy resolv.conf] **************************************************
 -options edns0 trust-ad
 -search openstacklocal
 +search efiffel.ttu
-+nameserver 192.168.42.19
-+nameserver 192.168.42.175
-+nameserver 192.168.42.165
++nameserver 192.168.42.89
++nameserver 192.168.42.193
++nameserver 192.168.42.108
 
 changed: [Nordo80-1]
 --- before: /etc/resolv.conf
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmpxrxjgvba/resolv.conf.j2
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmpa8_xzio7/resolv.conf.j2
 @@ -1,19 +1,4 @@
 -# This file is managed by man:systemd-resolved(8). Do not edit.
 -#
@@ -374,13 +376,13 @@ changed: [Nordo80-1]
 -options edns0 trust-ad
 -search openstacklocal
 +search efiffel.ttu
-+nameserver 192.168.42.19
-+nameserver 192.168.42.175
-+nameserver 192.168.42.165
++nameserver 192.168.42.89
++nameserver 192.168.42.193
++nameserver 192.168.42.108
 
 changed: [Nordo80-2]
 --- before: /etc/resolv.conf
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmpkb7qpjdw/resolv.conf.j2
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmpab9ufk9z/resolv.conf.j2
 @@ -1,19 +1,4 @@
 -# This file is managed by man:systemd-resolved(8). Do not edit.
 -#
@@ -402,9 +404,9 @@ changed: [Nordo80-2]
 -options edns0 trust-ad
 -search openstacklocal
 +search efiffel.ttu
-+nameserver 192.168.42.19
-+nameserver 192.168.42.175
-+nameserver 192.168.42.165
++nameserver 192.168.42.89
++nameserver 192.168.42.193
++nameserver 192.168.42.108
 
 changed: [Nordo80-3]
 
@@ -458,39 +460,39 @@ Suggested packages:
 The following NEW packages will be installed:
   python3-pymysql
 0 upgraded, 1 newly installed, 0 to remove and 140 not upgraded.
-changed: [Nordo80-2]
+changed: [Nordo80-1]
 Suggested packages:
   python-pymysql-doc
 The following NEW packages will be installed:
   python3-pymysql
 0 upgraded, 1 newly installed, 0 to remove and 140 not upgraded.
-changed: [Nordo80-1]
+changed: [Nordo80-2]
 
 TASK [mysql : Start mysql server] **********************************************
-ok: [Nordo80-2]
 ok: [Nordo80-1]
+ok: [Nordo80-2]
 
 TASK [mysql : Copy mysql config and restart mysql server] **********************
 --- before
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmprqhqsfa9/override.cnf.j2
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmp82qu7ii5/override.cnf.j2
 @@ -0,0 +1,6 @@
 +[mysqld]
 +bind-address = 0.0.0.0
 +log-bin = /var/log/mysql/mysql-bin.log
 +relay-log = /var/log/mysql/mysql-relay.log
 +replicate-do-db = agama
-+server-id = 19
++server-id = 89
 
 changed: [Nordo80-1]
 --- before
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmpmv_rxszx/override.cnf.j2
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmpwa9ors3i/override.cnf.j2
 @@ -0,0 +1,6 @@
 +[mysqld]
 +bind-address = 0.0.0.0
 +log-bin = /var/log/mysql/mysql-bin.log
 +relay-log = /var/log/mysql/mysql-relay.log
 +replicate-do-db = agama
-+server-id = 175
++server-id = 193
 
 changed: [Nordo80-2]
 
@@ -507,8 +509,8 @@ changed: [Nordo80-1]
 changed: [Nordo80-2]
 
 TASK [mysql : Read only mode on replica server] ********************************
-changed: [Nordo80-2]
 changed: [Nordo80-1]
+changed: [Nordo80-2]
 
 TASK [mysql_backup : Create a directory mysql in backup] ***********************
 --- before
@@ -524,7 +526,7 @@ TASK [mysql_backup : Create a directory mysql in backup] ***********************
 +    "state": "directory"
  }
 
-changed: [Nordo80-1]
+changed: [Nordo80-2]
 --- before
 +++ after
 @@ -1,6 +1,6 @@
@@ -538,11 +540,11 @@ changed: [Nordo80-1]
 +    "state": "directory"
  }
 
-changed: [Nordo80-2]
+changed: [Nordo80-1]
 
 TASK [mysql_backup : Create MySQL user backup] *********************************
-changed: [Nordo80-1]
 changed: [Nordo80-2]
+changed: [Nordo80-1]
 
 TASK [mysql_backup : Import cnf file to backup folder] *************************
 changed: [Nordo80-1]
@@ -550,7 +552,7 @@ changed: [Nordo80-2]
 
 TASK [mysql_backup : Mysql backup in cron] *************************************
 --- before
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmpqtns2e06/mysql-backup.j2
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmp4v7nqe1v/mysql-backup.j2
 @@ -0,0 +1,3 @@
 +00 03 * * *  backup mysqldump agama > /home/backup/mysql/agama.sql
 +20 03 * * 6  backup  duplicity --no-encryption full /home/backup/mysql/ rsync://Nordo80@backup.efiffel.ttu//home/Nordo80/mysql
@@ -558,7 +560,7 @@ TASK [mysql_backup : Mysql backup in cron] *************************************
 
 changed: [Nordo80-1]
 --- before
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmpjbq7g6zu/mysql-backup.j2
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmp0ivian13/mysql-backup.j2
 @@ -0,0 +1 @@
 +
 
@@ -574,7 +576,7 @@ TASK [mysql_backup : Ensure that cron file is created] *************************
      "path": "/etc/cron.d/mysql-backup"
  }
 
-changed: [Nordo80-2]
+changed: [Nordo80-1]
 --- before
 +++ after
 @@ -1,4 +1,4 @@
@@ -584,11 +586,11 @@ changed: [Nordo80-2]
      "path": "/etc/cron.d/mysql-backup"
  }
 
-changed: [Nordo80-1]
+changed: [Nordo80-2]
 
 RUNNING HANDLER [mysql : Restart mysql] ****************************************
-changed: [Nordo80-2]
 changed: [Nordo80-1]
+changed: [Nordo80-2]
 
 RUNNING HANDLER [mysql : Reset MySQL source] ***********************************
 skipping: [Nordo80-1] => (item=stopreplica) 
@@ -625,25 +627,25 @@ The following additional packages will be installed:
 The following NEW packages will be installed:
   iptables-persistent netfilter-persistent
 0 upgraded, 2 newly installed, 0 to remove and 140 not upgraded.
-changed: [Nordo80-2]
-The following additional packages will be installed:
-  netfilter-persistent
-The following NEW packages will be installed:
-  iptables-persistent netfilter-persistent
-0 upgraded, 2 newly installed, 0 to remove and 70 not upgraded.
-changed: [Nordo80-3]
+changed: [Nordo80-1]
 The following additional packages will be installed:
   netfilter-persistent
 The following NEW packages will be installed:
   iptables-persistent netfilter-persistent
 0 upgraded, 2 newly installed, 0 to remove and 140 not upgraded.
-changed: [Nordo80-1]
+changed: [Nordo80-2]
+The following additional packages will be installed:
+  netfilter-persistent
+The following NEW packages will be installed:
+  iptables-persistent netfilter-persistent
+0 upgraded, 2 newly installed, 0 to remove and 140 not upgraded.
+changed: [Nordo80-3]
 
 TASK [docker_fix : rule for docker] ********************************************
 --- before: /etc/iptables/rules.v4
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmpe4v346dg/rules.v4.j2
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmpswu7nszf/rules.v4.j2
 @@ -1,7 +1,8 @@
--# Generated by iptables-save v1.8.4 on Sun Jan 16 11:39:08 2022
+-# Generated by iptables-save v1.8.4 on Sun Jan 16 12:49:11 2022
 -*filter
 +*mangle
 +:PREROUTING ACCEPT [0:0]
@@ -653,13 +655,13 @@ TASK [docker_fix : rule for docker] ********************************************
 +:POSTROUTING ACCEPT [0:0]
 +-A POSTROUTING -o ens3 -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --set-mss 1400 --clamp-mss-to-pmtu
  COMMIT
--# Completed on Sun Jan 16 11:39:08 2022
+-# Completed on Sun Jan 16 12:49:11 2022
 
 changed: [Nordo80-1]
 --- before: /etc/iptables/rules.v4
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmpbrsv06b1/rules.v4.j2
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmpv9dqrm52/rules.v4.j2
 @@ -1,7 +1,8 @@
--# Generated by iptables-save v1.8.4 on Sun Jan 16 11:39:08 2022
+-# Generated by iptables-save v1.8.4 on Sun Jan 16 12:49:11 2022
 -*filter
 +*mangle
 +:PREROUTING ACCEPT [0:0]
@@ -669,13 +671,13 @@ changed: [Nordo80-1]
 +:POSTROUTING ACCEPT [0:0]
 +-A POSTROUTING -o ens3 -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --set-mss 1400 --clamp-mss-to-pmtu
  COMMIT
--# Completed on Sun Jan 16 11:39:08 2022
+-# Completed on Sun Jan 16 12:49:11 2022
 
 changed: [Nordo80-2]
 --- before: /etc/iptables/rules.v4
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmpi3h4fv8e/rules.v4.j2
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmp5eoappzc/rules.v4.j2
 @@ -1,7 +1,8 @@
--# Generated by iptables-save v1.8.4 on Sun Jan 16 11:39:09 2022
+-# Generated by iptables-save v1.8.4 on Sun Jan 16 12:49:12 2022
 -*filter
 +*mangle
 +:PREROUTING ACCEPT [0:0]
@@ -685,7 +687,7 @@ changed: [Nordo80-2]
 +:POSTROUTING ACCEPT [0:0]
 +-A POSTROUTING -o ens3 -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --set-mss 1400 --clamp-mss-to-pmtu
  COMMIT
--# Completed on Sun Jan 16 11:39:09 2022
+-# Completed on Sun Jan 16 12:49:12 2022
 
 changed: [Nordo80-3]
 
@@ -705,9 +707,9 @@ mistake may lead the ansible controller to loose access to the hosts and never
 regain it before fixing firewall rules through a serial console, or any other
 way except SSH. Please set task attribute 'poll' (=15) to 0, and 'async' (=0)
 to a value >2 and not greater than 'ansible_timeout' (=10) (recommended).
-changed: [Nordo80-3]
-changed: [Nordo80-2]
 changed: [Nordo80-1]
+changed: [Nordo80-2]
+changed: [Nordo80-3]
 
 PLAY [Docker] ******************************************************************
 
@@ -727,6 +729,17 @@ The following NEW packages will be installed:
   bridge-utils containerd dnsmasq-base docker.io libidn11 pigz python3-docker
   python3-websocket runc ubuntu-fan
 0 upgraded, 10 newly installed, 0 to remove and 140 not upgraded.
+changed: [Nordo80-3]
+The following additional packages will be installed:
+  bridge-utils containerd dnsmasq-base libidn11 pigz python3-websocket runc
+  ubuntu-fan
+Suggested packages:
+  ifupdown aufs-tools cgroupfs-mount | cgroup-lite debootstrap docker-doc
+  rinse zfs-fuse | zfsutils
+The following NEW packages will be installed:
+  bridge-utils containerd dnsmasq-base docker.io libidn11 pigz python3-docker
+  python3-websocket runc ubuntu-fan
+0 upgraded, 10 newly installed, 0 to remove and 140 not upgraded.
 changed: [Nordo80-2]
 The following additional packages will be installed:
   bridge-utils containerd dnsmasq-base libidn11 pigz python3-websocket runc
@@ -739,27 +752,16 @@ The following NEW packages will be installed:
   python3-websocket runc ubuntu-fan
 0 upgraded, 10 newly installed, 0 to remove and 140 not upgraded.
 changed: [Nordo80-1]
-The following additional packages will be installed:
-  bridge-utils containerd dnsmasq-base libidn11 pigz python3-websocket runc
-  ubuntu-fan
-Suggested packages:
-  ifupdown aufs-tools cgroupfs-mount | cgroup-lite debootstrap docker-doc
-  rinse zfs-fuse | zfsutils
-The following NEW packages will be installed:
-  bridge-utils containerd dnsmasq-base docker.io libidn11 pigz python3-docker
-  python3-websocket runc ubuntu-fan
-0 upgraded, 10 newly installed, 0 to remove and 70 not upgraded.
-changed: [Nordo80-3]
 
 TASK [docker : Start docker service] *******************************************
+ok: [Nordo80-2]
 ok: [Nordo80-3]
 ok: [Nordo80-1]
-ok: [Nordo80-2]
 
 TASK [docker : Log into Dockerhub] *********************************************
 changed: [Nordo80-3]
-changed: [Nordo80-2]
 changed: [Nordo80-1]
+changed: [Nordo80-2]
 
 TASK [agama : Create install directory] ****************************************
 --- before
@@ -797,31 +799,31 @@ TASK [agama : Install docker file] *********************************************
 [WARNING]: Module remote_tmp /root/.ansible/tmp did not exist and was created
 with a mode of 0700, this may cause issues when running as another user. To
 avoid this, create the remote_tmp dir with the correct permissions manually
+changed: [Nordo80-2]
 changed: [Nordo80-3]
 changed: [Nordo80-1]
-changed: [Nordo80-2]
 
 TASK [agama : Build agama container] *******************************************
+changed: [Nordo80-2]
 changed: [Nordo80-3]
 changed: [Nordo80-1]
-changed: [Nordo80-2]
 
 TASK [agama : Install and start agama 1] ***************************************
 changed: [Nordo80-3]
-changed: [Nordo80-2]
 changed: [Nordo80-1]
+changed: [Nordo80-2]
 
 TASK [agama : Install and start agama 2] ***************************************
-changed: [Nordo80-3]
-changed: [Nordo80-1]
 changed: [Nordo80-2]
+changed: [Nordo80-1]
+changed: [Nordo80-3]
 
 PLAY [Nginx all VMS] ***********************************************************
 
 TASK [Gathering Facts] *********************************************************
+ok: [Nordo80-3]
 ok: [Nordo80-2]
 ok: [Nordo80-1]
-ok: [Nordo80-3]
 
 TASK [nginx : Install nginx] ***************************************************
 The following additional packages will be installed:
@@ -837,7 +839,7 @@ The following NEW packages will be installed:
   libnginx-mod-http-xslt-filter libnginx-mod-mail libnginx-mod-stream libtiff5
   libwebp6 libxpm4 nginx nginx-common nginx-core
 0 upgraded, 17 newly installed, 0 to remove and 140 not upgraded.
-changed: [Nordo80-2]
+changed: [Nordo80-3]
 The following additional packages will be installed:
   fontconfig-config fonts-dejavu-core libfontconfig1 libgd3 libjbig0
   libjpeg-turbo8 libjpeg8 libnginx-mod-http-image-filter
@@ -864,12 +866,12 @@ The following NEW packages will be installed:
   libjpeg-turbo8 libjpeg8 libnginx-mod-http-image-filter
   libnginx-mod-http-xslt-filter libnginx-mod-mail libnginx-mod-stream libtiff5
   libwebp6 libxpm4 nginx nginx-common nginx-core
-0 upgraded, 17 newly installed, 0 to remove and 70 not upgraded.
-changed: [Nordo80-3]
+0 upgraded, 17 newly installed, 0 to remove and 140 not upgraded.
+changed: [Nordo80-2]
 
 TASK [nginx : Copy config] *****************************************************
 --- before: /etc/nginx/sites-enabled/default
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmpiy5i9j50/default.j2
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmpiiwqs360/default.j2
 @@ -1,91 +1,23 @@
 -##
 -# You should look at the following URL's in order to grasp a solid understanding
@@ -985,7 +987,7 @@ TASK [nginx : Copy config] *****************************************************
 
 changed: [Nordo80-3]
 --- before: /etc/nginx/sites-enabled/default
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmpj01zlgqa/default.j2
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmp78f225ql/default.j2
 @@ -1,91 +1,27 @@
 -##
 -# You should look at the following URL's in order to grasp a solid understanding
@@ -1104,7 +1106,7 @@ changed: [Nordo80-3]
 
 changed: [Nordo80-1]
 --- before: /etc/nginx/sites-enabled/default
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmpexiqzb0o/default.j2
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmpi9vy_ror/default.j2
 @@ -1,91 +1,27 @@
 -##
 -# You should look at the following URL's in order to grasp a solid understanding
@@ -1232,35 +1234,24 @@ TASK [nginx_exporter : Install Nginx exporter] *********************************
 The following NEW packages will be installed:
   prometheus-nginx-exporter
 0 upgraded, 1 newly installed, 0 to remove and 140 not upgraded.
+changed: [Nordo80-1]
+The following NEW packages will be installed:
+  prometheus-nginx-exporter
+0 upgraded, 1 newly installed, 0 to remove and 140 not upgraded.
 changed: [Nordo80-2]
 The following NEW packages will be installed:
   prometheus-nginx-exporter
 0 upgraded, 1 newly installed, 0 to remove and 140 not upgraded.
-changed: [Nordo80-1]
-The following NEW packages will be installed:
-  prometheus-nginx-exporter
-0 upgraded, 1 newly installed, 0 to remove and 70 not upgraded.
 changed: [Nordo80-3]
 
 TASK [nginx_exporter : Enable nginx-exporter] **********************************
 changed: [Nordo80-1]
-changed: [Nordo80-2]
 changed: [Nordo80-3]
+changed: [Nordo80-2]
 
 TASK [nginx_exporter : Copy exporter config] ***********************************
 --- before
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmpi_rpjakk/exporter.j2
-@@ -0,0 +1,6 @@
-+server {
-+    listen 8080 default_server;
-+    location = /stub_status {
-+        stub_status;
-+    }
-+}
-
-changed: [Nordo80-2]
---- before
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmpi_i9cbwr/exporter.j2
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmp3q40w3xz/exporter.j2
 @@ -0,0 +1,6 @@
 +server {
 +    listen 8080 default_server;
@@ -1271,7 +1262,7 @@ changed: [Nordo80-2]
 
 changed: [Nordo80-1]
 --- before
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmpre5qpd08/exporter.j2
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmpylr_7j_j/exporter.j2
 @@ -0,0 +1,6 @@
 +server {
 +    listen 8080 default_server;
@@ -1281,16 +1272,27 @@ changed: [Nordo80-1]
 +}
 
 changed: [Nordo80-3]
+--- before
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmpzobcuo8n/exporter.j2
+@@ -0,0 +1,6 @@
++server {
++    listen 8080 default_server;
++    location = /stub_status {
++        stub_status;
++    }
++}
+
+changed: [Nordo80-2]
 
 RUNNING HANDLER [nginx : Restart nginx service] ********************************
 changed: [Nordo80-3]
-changed: [Nordo80-2]
 changed: [Nordo80-1]
+changed: [Nordo80-2]
 
 RUNNING HANDLER [nginx_exporter : Restart nginx exporter] **********************
-changed: [Nordo80-2]
 changed: [Nordo80-1]
 changed: [Nordo80-3]
+changed: [Nordo80-2]
 
 PLAY [Install Node Exporters] **************************************************
 
@@ -1311,6 +1313,17 @@ The following NEW packages will be installed:
 0 upgraded, 7 newly installed, 0 to remove and 140 not upgraded.
 changed: [Nordo80-1]
 The following additional packages will be installed:
+  libio-pty-perl libipc-run-perl libtime-duration-perl libtimedate-perl
+  moreutils prometheus-node-exporter-collectors smartmontools
+Suggested packages:
+  gsmartcontrol smart-notifier mailx | mailutils
+The following NEW packages will be installed:
+  libio-pty-perl libipc-run-perl libtime-duration-perl libtimedate-perl
+  moreutils prometheus-node-exporter prometheus-node-exporter-collectors
+  smartmontools
+0 upgraded, 8 newly installed, 0 to remove and 140 not upgraded.
+changed: [Nordo80-3]
+The following additional packages will be installed:
   libio-pty-perl libipc-run-perl libtime-duration-perl moreutils
   prometheus-node-exporter-collectors smartmontools
 Suggested packages:
@@ -1320,17 +1333,6 @@ The following NEW packages will be installed:
   prometheus-node-exporter prometheus-node-exporter-collectors smartmontools
 0 upgraded, 7 newly installed, 0 to remove and 140 not upgraded.
 changed: [Nordo80-2]
-The following additional packages will be installed:
-  libio-pty-perl libipc-run-perl libtime-duration-perl libtimedate-perl
-  moreutils prometheus-node-exporter-collectors smartmontools
-Suggested packages:
-  gsmartcontrol smart-notifier mailx | mailutils
-The following NEW packages will be installed:
-  libio-pty-perl libipc-run-perl libtime-duration-perl libtimedate-perl
-  moreutils prometheus-node-exporter prometheus-node-exporter-collectors
-  smartmontools
-0 upgraded, 8 newly installed, 0 to remove and 70 not upgraded.
-changed: [Nordo80-3]
 
 TASK [node_exporter : Enable node exporter] ************************************
 ok: [Nordo80-1]
@@ -1357,12 +1359,12 @@ The following NEW packages will be installed:
   libjs-jquery libjs-jquery-hotkeys libjs-moment libjs-moment-timezone
   libjs-mustache libjs-popper.js libjs-rickshaw libnode64 node-jquery nodejs
   nodejs-doc prometheus
-0 upgraded, 19 newly installed, 0 to remove and 70 not upgraded.
+0 upgraded, 19 newly installed, 0 to remove and 140 not upgraded.
 changed: [Nordo80-3]
 
 TASK [prometheus : Configure Prometheus] ***************************************
 --- before: /etc/prometheus/prometheus.yml
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmpzwgjzr_v/prometheus.yml.j2
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmpeytfa69m/prometheus.yml.j2
 @@ -1,44 +1,56 @@
 -# Sample config for Prometheus.
 +global:
@@ -1460,11 +1462,11 @@ changed: [Nordo80-3]
 
 TASK [prometheus : Make prometheus available] **********************************
 --- before: /etc/default/prometheus
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmpbk8dp1fl/prometheus
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmpxvl_uu3k/prometheus
 @@ -1,57 +1,2 @@
 -# Set the command-line arguments to pass to the server.
 -ARGS=""
-+ARGS="--web.external-url=http://193.40.156.67:16580/prometheus"
++ARGS="--web.external-url=http://193.40.156.67:10880/prometheus"
  
 -# Prometheus supports the following options:
 -#  --config.file="/etc/prometheus/prometheus.yml"
@@ -1541,151 +1543,25 @@ The following additional packages will be installed:
 The following NEW packages will be installed:
   daemon prometheus-mysqld-exporter
 0 upgraded, 2 newly installed, 0 to remove and 140 not upgraded.
-changed: [Nordo80-2]
+changed: [Nordo80-1]
 The following additional packages will be installed:
   daemon
 The following NEW packages will be installed:
   daemon prometheus-mysqld-exporter
 0 upgraded, 2 newly installed, 0 to remove and 140 not upgraded.
-changed: [Nordo80-1]
+changed: [Nordo80-2]
 
 TASK [mysql_exporter : Create MySQL user exporter] *****************************
-changed: [Nordo80-2]
 changed: [Nordo80-1]
+changed: [Nordo80-2]
 
 TASK [mysql_exporter : my.cnf template] ****************************************
-changed: [Nordo80-2]
 changed: [Nordo80-1]
+changed: [Nordo80-2]
 
 TASK [mysql_exporter : Prometheus mysqld exporter template] ********************
 --- before: /etc/default/prometheus-mysqld-exporter
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmpw45axgav/prometheus-mysqld-exporter.j2
-@@ -1,120 +1 @@
--# By default the connection string will be read from
--# $HOME/my.cnf or from the file specified with the -config.my-cnf parameter.
--
--# To set a connection string from the environment instead, uncomment one of the
--# following lines.
--
--# Using UNIX domain sockets and authentication:
--# DATA_SOURCE_NAME="prometheus:nopassword@unix(/run/mysqld/mysqld.sock)/"
--
--# Using a TCP connection and password authentication:
--# DATA_SOURCE_NAME="login:password@(hostname:port)/dbname"
--
--# Note the user must be granted enough privileges for the exporter to run.
--# Example to create a user to connect with the UNIX socket:
--#
--#  CREATE USER IF NOT EXISTS 'prometheus'@'localhost' IDENTIFIED VIA unix_socket;
--#  GRANT PROCESS, REPLICATION CLIENT, SELECT ON *.* TO 'prometheus'@'localhost';
--
--# Set the command-line arguments to pass to the exporter.
--# ARGS='-config.my-cnf /etc/mysql/debian.cnf'
--
--# Usage of prometheus-mysqld-exporter:
--#   -collect.auto_increment.columns
--#     	Collect auto_increment columns and max values from information_schema
--#  --exporter.lock_wait_timeout=2
--#       Set a lock_wait_timeout on the connection to avoid long metadata
--#       locking.
--#  --exporter.log_slow_filter
--#       Add a log_slow_filter to avoid slow query logging of scrapes. NOTE: Not
--#       supported by Oracle MySQL.
--#  --collect.heartbeat.database="heartbeat"
--#       Database from where to collect heartbeat data
--#  --collect.heartbeat.table="heartbeat"
--#       Table from where to collect heartbeat data
--#  --collect.info_schema.processlist.min_time=0
--#       Minimum time a thread must be in each state to be counted
--#  --collect.info_schema.tables.databases="*"
--#       The list of databases to collect table stats for, or '*' for all
--#  --collect.perf_schema.eventsstatements.limit=250
--#       Limit the number of events statements digests by response time
--#  --collect.perf_schema.eventsstatements.timelimit=86400
--#       Limit how old the 'last_seen' events statements can be, in seconds
--#  --collect.perf_schema.eventsstatements.digest_text_limit=120
--#       Maximum length of the normalized statement text
--#  --collect.perf_schema.file_instances.filter=".*"
--#       RegEx file_name filter for performance_schema.file_summary_by_instance
--#  --collect.perf_schema.file_instances.remove_prefix="/var/lib/mysql/"
--#       Remove path prefix in performance_schema.file_summary_by_instance
--#  --web.listen-address=":9104"
--#       Address to listen on for web interface and telemetry.
--#  --web.telemetry-path="/metrics"
--#       Path under which to expose metrics.
--#  --config.my-cnf="$HOME/.my.cnf"
--#       Path to .my.cnf file to read MySQL credentials from.
--#  --collect.global_variables
--#       Collect from SHOW GLOBAL VARIABLES
--#  --collect.slave_status
--#       Collect from SHOW SLAVE STATUS
--#  --collect.info_schema.processlist
--#       Collect current thread state counts from the
--#       information_schema.processlist
--#  --collect.info_schema.tables
--#       Collect metrics from information_schema.tables
--#  --collect.info_schema.innodb_tablespaces
--#       Collect metrics from information_schema.innodb_sys_tablespaces
--#  --collect.info_schema.innodb_metrics
--#       Collect metrics from information_schema.innodb_metrics
--#  --collect.auto_increment.columns
--#       Collect auto_increment columns and max values from information_schema
--#  --collect.global_status
--#       Collect from SHOW GLOBAL STATUS
--#  --collect.perf_schema.tableiowaits
--#       Collect metrics from performance_schema.table_io_waits_summary_by_table
--#  --collect.perf_schema.indexiowaits
--#       Collect metrics from
--#       performance_schema.table_io_waits_summary_by_index_usage
--#  --collect.perf_schema.tablelocks
--#       Collect metrics from
--#       performance_schema.table_lock_waits_summary_by_table
--#  --collect.perf_schema.eventsstatements
--#       Collect metrics from
--#       performance_schema.events_statements_summary_by_digest
--#  --collect.perf_schema.eventswaits
--#       Collect metrics from
--#       performance_schema.events_waits_summary_global_by_event_name
--#  --collect.perf_schema.file_events
--#       Collect metrics from performance_schema.file_summary_by_event_name
--#  --collect.perf_schema.file_instances
--#       Collect metrics from performance_schema.file_summary_by_instance
--#  --collect.binlog_size
--#       Collect the current size of all registered binlog files
--#  --collect.info_schema.userstats
--#       If running with userstat=1, set to true to collect user statistics
--#  --collect.info_schema.clientstats
--#       If running with userstat=1, set to true to collect client statistics
--#  --collect.info_schema.tablestats
--#       If running with userstat=1, set to true to collect table statistics
--#  --collect.info_schema.innodb_cmp
--#       Collect metrics from information_schema.innodb_cmp
--#  --collect.info_schema.innodb_cmpmem
--#       Collect metrics from information_schema.innodb_cmpmem
--#  --collect.info_schema.query_response_time
--#       Collect query response time distribution if query_response_time_stats
--#       is ON.
--#  --collect.engine_tokudb_status
--#       Collect from SHOW ENGINE TOKUDB STATUS
--#  --collect.perf_schema.replication_group_member_stats
--#       Collect metrics from performance_schema.replication_group_member_stats
--#  --collect.heartbeat
--#       Collect from heartbeat
--#  --collect.slave_hosts
--#       Scrape information from 'SHOW SLAVE HOSTS'
--#  --collect.engine_innodb_status
--#       Collect from SHOW ENGINE INNODB STATUS
--#  --log.level="info"
--#       Only log messages with the given severity or above. Valid levels:
--#       [debug, info, warn, error, fatal]
--#  --log.format="logger:stderr"
--#       Set the log target and format. Example:
--#       "logger:syslog?appname=bob&local=7" or "logger:stdout?json=true"
-+ARGS="--collect.slave_status"
-
-changed: [Nordo80-1]
---- before: /etc/default/prometheus-mysqld-exporter
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmp85rk2uhk/prometheus-mysqld-exporter.j2
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmpttf1z2jk/prometheus-mysqld-exporter.j2
 @@ -1,120 +1 @@
 -# By default the connection string will be read from
 -# $HOME/my.cnf or from the file specified with the -config.my-cnf parameter.
@@ -1810,6 +1686,132 @@ changed: [Nordo80-1]
 +ARGS="--collect.slave_status"
 
 changed: [Nordo80-2]
+--- before: /etc/default/prometheus-mysqld-exporter
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmpwr78gudc/prometheus-mysqld-exporter.j2
+@@ -1,120 +1 @@
+-# By default the connection string will be read from
+-# $HOME/my.cnf or from the file specified with the -config.my-cnf parameter.
+-
+-# To set a connection string from the environment instead, uncomment one of the
+-# following lines.
+-
+-# Using UNIX domain sockets and authentication:
+-# DATA_SOURCE_NAME="prometheus:nopassword@unix(/run/mysqld/mysqld.sock)/"
+-
+-# Using a TCP connection and password authentication:
+-# DATA_SOURCE_NAME="login:password@(hostname:port)/dbname"
+-
+-# Note the user must be granted enough privileges for the exporter to run.
+-# Example to create a user to connect with the UNIX socket:
+-#
+-#  CREATE USER IF NOT EXISTS 'prometheus'@'localhost' IDENTIFIED VIA unix_socket;
+-#  GRANT PROCESS, REPLICATION CLIENT, SELECT ON *.* TO 'prometheus'@'localhost';
+-
+-# Set the command-line arguments to pass to the exporter.
+-# ARGS='-config.my-cnf /etc/mysql/debian.cnf'
+-
+-# Usage of prometheus-mysqld-exporter:
+-#   -collect.auto_increment.columns
+-#     	Collect auto_increment columns and max values from information_schema
+-#  --exporter.lock_wait_timeout=2
+-#       Set a lock_wait_timeout on the connection to avoid long metadata
+-#       locking.
+-#  --exporter.log_slow_filter
+-#       Add a log_slow_filter to avoid slow query logging of scrapes. NOTE: Not
+-#       supported by Oracle MySQL.
+-#  --collect.heartbeat.database="heartbeat"
+-#       Database from where to collect heartbeat data
+-#  --collect.heartbeat.table="heartbeat"
+-#       Table from where to collect heartbeat data
+-#  --collect.info_schema.processlist.min_time=0
+-#       Minimum time a thread must be in each state to be counted
+-#  --collect.info_schema.tables.databases="*"
+-#       The list of databases to collect table stats for, or '*' for all
+-#  --collect.perf_schema.eventsstatements.limit=250
+-#       Limit the number of events statements digests by response time
+-#  --collect.perf_schema.eventsstatements.timelimit=86400
+-#       Limit how old the 'last_seen' events statements can be, in seconds
+-#  --collect.perf_schema.eventsstatements.digest_text_limit=120
+-#       Maximum length of the normalized statement text
+-#  --collect.perf_schema.file_instances.filter=".*"
+-#       RegEx file_name filter for performance_schema.file_summary_by_instance
+-#  --collect.perf_schema.file_instances.remove_prefix="/var/lib/mysql/"
+-#       Remove path prefix in performance_schema.file_summary_by_instance
+-#  --web.listen-address=":9104"
+-#       Address to listen on for web interface and telemetry.
+-#  --web.telemetry-path="/metrics"
+-#       Path under which to expose metrics.
+-#  --config.my-cnf="$HOME/.my.cnf"
+-#       Path to .my.cnf file to read MySQL credentials from.
+-#  --collect.global_variables
+-#       Collect from SHOW GLOBAL VARIABLES
+-#  --collect.slave_status
+-#       Collect from SHOW SLAVE STATUS
+-#  --collect.info_schema.processlist
+-#       Collect current thread state counts from the
+-#       information_schema.processlist
+-#  --collect.info_schema.tables
+-#       Collect metrics from information_schema.tables
+-#  --collect.info_schema.innodb_tablespaces
+-#       Collect metrics from information_schema.innodb_sys_tablespaces
+-#  --collect.info_schema.innodb_metrics
+-#       Collect metrics from information_schema.innodb_metrics
+-#  --collect.auto_increment.columns
+-#       Collect auto_increment columns and max values from information_schema
+-#  --collect.global_status
+-#       Collect from SHOW GLOBAL STATUS
+-#  --collect.perf_schema.tableiowaits
+-#       Collect metrics from performance_schema.table_io_waits_summary_by_table
+-#  --collect.perf_schema.indexiowaits
+-#       Collect metrics from
+-#       performance_schema.table_io_waits_summary_by_index_usage
+-#  --collect.perf_schema.tablelocks
+-#       Collect metrics from
+-#       performance_schema.table_lock_waits_summary_by_table
+-#  --collect.perf_schema.eventsstatements
+-#       Collect metrics from
+-#       performance_schema.events_statements_summary_by_digest
+-#  --collect.perf_schema.eventswaits
+-#       Collect metrics from
+-#       performance_schema.events_waits_summary_global_by_event_name
+-#  --collect.perf_schema.file_events
+-#       Collect metrics from performance_schema.file_summary_by_event_name
+-#  --collect.perf_schema.file_instances
+-#       Collect metrics from performance_schema.file_summary_by_instance
+-#  --collect.binlog_size
+-#       Collect the current size of all registered binlog files
+-#  --collect.info_schema.userstats
+-#       If running with userstat=1, set to true to collect user statistics
+-#  --collect.info_schema.clientstats
+-#       If running with userstat=1, set to true to collect client statistics
+-#  --collect.info_schema.tablestats
+-#       If running with userstat=1, set to true to collect table statistics
+-#  --collect.info_schema.innodb_cmp
+-#       Collect metrics from information_schema.innodb_cmp
+-#  --collect.info_schema.innodb_cmpmem
+-#       Collect metrics from information_schema.innodb_cmpmem
+-#  --collect.info_schema.query_response_time
+-#       Collect query response time distribution if query_response_time_stats
+-#       is ON.
+-#  --collect.engine_tokudb_status
+-#       Collect from SHOW ENGINE TOKUDB STATUS
+-#  --collect.perf_schema.replication_group_member_stats
+-#       Collect metrics from performance_schema.replication_group_member_stats
+-#  --collect.heartbeat
+-#       Collect from heartbeat
+-#  --collect.slave_hosts
+-#       Scrape information from 'SHOW SLAVE HOSTS'
+-#  --collect.engine_innodb_status
+-#       Collect from SHOW ENGINE INNODB STATUS
+-#  --log.level="info"
+-#       Only log messages with the given severity or above. Valid levels:
+-#       [debug, info, warn, error, fatal]
+-#  --log.format="logger:stderr"
+-#       Set the log target and format. Example:
+-#       "logger:syslog?appname=bob&local=7" or "logger:stdout?json=true"
++ARGS="--collect.slave_status"
+
+changed: [Nordo80-1]
 
 TASK [mysql_exporter : sleep 10 sec] *******************************************
 Pausing for 10 seconds
@@ -1821,8 +1823,8 @@ changed: [Nordo80-1]
 changed: [Nordo80-2]
 
 RUNNING HANDLER [mysql_exporter : Restart mysqld exporter] *********************
-changed: [Nordo80-2]
 changed: [Nordo80-1]
+changed: [Nordo80-2]
 
 PLAY [grafana] *****************************************************************
 
@@ -1853,7 +1855,7 @@ changed: [Nordo80-3] => (item=datasources)
 
 TASK [grafana : Put telegraf.yaml to datasources] ******************************
 --- before
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmps8s7l5z9/telegraf.yaml.j2
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmpdkjx8th7/telegraf.yaml.j2
 @@ -0,0 +1,9 @@
 +apiVersion: 1
 +
@@ -1869,7 +1871,7 @@ changed: [Nordo80-3]
 
 TASK [grafana : Put influxdb.yaml to datasources] ******************************
 --- before
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmpbms8kb19/influx.yaml.j2
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmpa3i5lqm1/influx.yaml.j2
 @@ -0,0 +1,11 @@
 +apiVersion: 1
 +
@@ -1887,7 +1889,7 @@ changed: [Nordo80-3]
 
 TASK [grafana : Put prometheus.yaml to datasources] ****************************
 --- before
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmpdux27cgr/prometheus.yaml.j2
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmpvmtlenzw/prometheus.yaml.j2
 @@ -0,0 +1,23 @@
 +   apiVersion: 1
 +
@@ -1900,7 +1902,7 @@ TASK [grafana : Put prometheus.yaml to datasources] ****************************
 +     type: prometheus
 +     access: proxy
 +     orgId: 1
-+     url: http://193.40.156.67:16580/prometheus
++     url: http://193.40.156.67:10880/prometheus
 +     password:
 +     user:
 +     database:
@@ -1917,7 +1919,7 @@ changed: [Nordo80-3]
 
 TASK [grafana : Put dashboard.yaml to dashboards] ******************************
 --- before
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmplaa337g6/dashboard.yaml.j2
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmpvry73x8p/dashboard.yaml.j2
 @@ -0,0 +1,24 @@
 +apiVersion: 1
 +
@@ -5013,7 +5015,7 @@ changed: [Nordo80-3]
 TASK [influxdb : Install InfluxDB] *********************************************
 The following NEW packages will be installed:
   influxdb
-0 upgraded, 1 newly installed, 0 to remove and 70 not upgraded.
+0 upgraded, 1 newly installed, 0 to remove and 140 not upgraded.
 changed: [Nordo80-3]
 
 TASK [influxdb : Start and enable influxdb] ************************************
@@ -5022,7 +5024,7 @@ changed: [Nordo80-3]
 TASK [influxdb : Install Telegraf] *********************************************
 The following NEW packages will be installed:
   telegraf
-0 upgraded, 1 newly installed, 0 to remove and 70 not upgraded.
+0 upgraded, 1 newly installed, 0 to remove and 140 not upgraded.
 changed: [Nordo80-3]
 
 TASK [influxdb : influxdb configuration] ***************************************
@@ -5646,7 +5648,7 @@ changed: [Nordo80-3]
 
 TASK [influxdb_exporter : Change config for influxdb stats exporter service] ***
 --- before
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmpopy6ovm6/prometheus-influxdb-stats-exporter.service.j2
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmpma33y6ev/prometheus-influxdb-stats-exporter.service.j2
 @@ -0,0 +1,11 @@
 +[Unit]
 +Description=InfluxDB stats
@@ -5681,7 +5683,7 @@ changed: [Nordo80-3]
 
 TASK [influxdb_backup : Influxdb backup in cron] *******************************
 --- before
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmp9tlpmrxb/influxdb-backup.j2
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmptq_ngl9w/influxdb-backup.j2
 @@ -0,0 +1,3 @@
 +00 02 * * *  backup rm -rf /home/backup/influxdb/*; influxd backup -portable -database telegraf /home/backup/influxdb
 +20 02 * * 6  backup  duplicity --no-encryption full /home/backup/influxdb/ rsync://Nordo80@backup.efiffel.ttu//home/Nordo80/influxdb
@@ -5705,23 +5707,12 @@ PLAY [Rsyslog configuration] ***************************************************
 
 TASK [Gathering Facts] *********************************************************
 ok: [Nordo80-3]
-ok: [Nordo80-2]
 ok: [Nordo80-1]
+ok: [Nordo80-2]
 
 TASK [rsyslog : Reconfigure Rsyslog] *******************************************
 --- before
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmpuibr0n4j/10-telegraf.conf.j2
-@@ -0,0 +1,6 @@
-+$ActionQueueType LinkedList # use asynchronous processing
-+$ActionQueueFileName srvrfwd # set file name, also enables disk mode
-+$ActionResumeRetryCount -1 # infinite retries on insert failure
-+$ActionQueueSaveOnShutdown on # save in-memory data if rsyslog shuts down
-+
-+*.* @Nordo80-3:6514;RSYSLOG_SyslogProtocol23Format
-
-changed: [Nordo80-1]
---- before
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmpn3ae63jn/10-telegraf.conf.j2
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmpyugjfspz/10-telegraf.conf.j2
 @@ -0,0 +1,6 @@
 +$ActionQueueType LinkedList # use asynchronous processing
 +$ActionQueueFileName srvrfwd # set file name, also enables disk mode
@@ -5732,7 +5723,18 @@ changed: [Nordo80-1]
 
 changed: [Nordo80-2]
 --- before
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmpx7hj3xgu/10-telegraf.conf.j2
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmp0aragq99/10-telegraf.conf.j2
+@@ -0,0 +1,6 @@
++$ActionQueueType LinkedList # use asynchronous processing
++$ActionQueueFileName srvrfwd # set file name, also enables disk mode
++$ActionResumeRetryCount -1 # infinite retries on insert failure
++$ActionQueueSaveOnShutdown on # save in-memory data if rsyslog shuts down
++
++*.* @Nordo80-3:6514;RSYSLOG_SyslogProtocol23Format
+
+changed: [Nordo80-1]
+--- before
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmpjve3y8sr/10-telegraf.conf.j2
 @@ -0,0 +1,6 @@
 +$ActionQueueType LinkedList # use asynchronous processing
 +$ActionQueueFileName srvrfwd # set file name, also enables disk mode
@@ -5744,8 +5746,8 @@ changed: [Nordo80-2]
 changed: [Nordo80-3]
 
 RUNNING HANDLER [rsyslog : Restart rsyslog] ************************************
-changed: [Nordo80-1]
 changed: [Nordo80-2]
+changed: [Nordo80-1]
 changed: [Nordo80-3]
 
 PLAY [Pinger script setup] *****************************************************
@@ -5786,7 +5788,7 @@ changed: [Nordo80-1]
 
 TASK [pinger : Import pinger configuration] ************************************
 --- before
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmpj9c040bu/pinger.conf.j2
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmp3d2bbgsj/pinger.conf.j2
 @@ -0,0 +1,3 @@
 +database_url=http://Nordo80-3:8086
 +database_name=latency
@@ -5796,7 +5798,7 @@ changed: [Nordo80-1]
 
 TASK [pinger : Change script location] *****************************************
 --- before
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmppxs56c1i/pinger.sh.j2
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmp2idzpaem/pinger.sh.j2
 @@ -0,0 +1,26 @@
 +#!/bin/bash
 +
@@ -5829,7 +5831,7 @@ changed: [Nordo80-1]
 
 TASK [pinger : Create pinger service] ******************************************
 --- before
-+++ after: /home/aleksandr/.ansible/tmp/ansible-local-4180xgmio1ph/tmpdbfmcxwn/pinger.service.j2
++++ after: /home/aleksandr/.ansible/tmp/ansible-local-9455grdxphur/tmpn72ddwi0/pinger.service.j2
 @@ -0,0 +1,11 @@
 +[Unit]
 +Description=Pinger service reporting connection latency
@@ -5864,9 +5866,9 @@ ok: [Nordo80-2]
 ok: [Nordo80-3]
 
 TASK [backup : Create user backup] *********************************************
-changed: [Nordo80-3]
-changed: [Nordo80-1]
 changed: [Nordo80-2]
+changed: [Nordo80-1]
+changed: [Nordo80-3]
 
 TASK [backup : Create a directory if it does not exist] ************************
 --- before
@@ -5913,568 +5915,54 @@ changed: [Nordo80-2]
 changed: [Nordo80-3]
 
 TASK [backup : put known hosts] ************************************************
-An exception occurred during task execution. To see the full traceback, use -vvv. The error was: ValueError: Invalid padding bytes.
-fatal: [Nordo80-1]: FAILED! => {"changed": false, "msg": "ValueError: Invalid padding bytes."}
-An exception occurred during task execution. To see the full traceback, use -vvv. The error was: ValueError: Invalid padding bytes.
-fatal: [Nordo80-2]: FAILED! => {"changed": false, "msg": "ValueError: Invalid padding bytes."}
-An exception occurred during task execution. To see the full traceback, use -vvv. The error was: ValueError: Invalid padding bytes.
-fatal: [Nordo80-3]: FAILED! => {"changed": false, "msg": "ValueError: Invalid padding bytes."}
+
+[WARNING]: 
+There was a vault format error: Vault format unhexlify error: Odd-length string
+
+The error appears to be in '/home/aleksandr/ansible/ica0002/group_vars/all.yaml': line 42, column 24, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+backup_ip: 192.168.42.132
+backup_server_ssh_key: !vault |
+                       ^ here
+
+[WARNING]: 
+There was a vault format error: Vault format unhexlify error: Odd-length string
+
+The error appears to be in '/home/aleksandr/ansible/ica0002/group_vars/all.yaml': line 42, column 24, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+backup_ip: 192.168.42.132
+backup_server_ssh_key: !vault |
+                       ^ here
+An exception occurred during task execution. To see the full traceback, use -vvv. The error was:                        ^ here
+fatal: [Nordo80-1]: FAILED! => {"changed": false, "msg": "AnsibleVaultFormatError: Vault format unhexlify error: Odd-length string\n\nThe error appears to be in '/home/aleksandr/ansible/ica0002/group_vars/all.yaml': line 42, column 24, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\nbackup_ip: 192.168.42.132\nbackup_server_ssh_key: !vault |\n                       ^ here\n"}
+An exception occurred during task execution. To see the full traceback, use -vvv. The error was:                        ^ here
+fatal: [Nordo80-2]: FAILED! => {"changed": false, "msg": "AnsibleVaultFormatError: Vault format unhexlify error: Odd-length string\n\nThe error appears to be in '/home/aleksandr/ansible/ica0002/group_vars/all.yaml': line 42, column 24, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\nbackup_ip: 192.168.42.132\nbackup_server_ssh_key: !vault |\n                       ^ here\n"}
+
+[WARNING]: 
+There was a vault format error: Vault format unhexlify error: Odd-length string
+
+The error appears to be in '/home/aleksandr/ansible/ica0002/group_vars/all.yaml': line 42, column 24, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+backup_ip: 192.168.42.132
+backup_server_ssh_key: !vault |
+                       ^ here
+An exception occurred during task execution. To see the full traceback, use -vvv. The error was:                        ^ here
+fatal: [Nordo80-3]: FAILED! => {"changed": false, "msg": "AnsibleVaultFormatError: Vault format unhexlify error: Odd-length string\n\nThe error appears to be in '/home/aleksandr/ansible/ica0002/group_vars/all.yaml': line 42, column 24, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\nbackup_ip: 192.168.42.132\nbackup_server_ssh_key: !vault |\n                       ^ here\n"}
 
 PLAY RECAP *********************************************************************
 Nordo80-1                  : ok=82   changed=62   unreachable=0    failed=1    skipped=5    rescued=0    ignored=0   
 Nordo80-2                  : ok=70   changed=53   unreachable=0    failed=1    skipped=5    rescued=0    ignored=0   
-Nordo80-3                  : ok=86   changed=66   unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+Nordo80-3                  : ok=86   changed=67   unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
 
-[DEPRECATION WARNING]: Ansible will require Python 3.8 or newer on the 
-controller starting with Ansible 2.12. Current version: 3.6.9 (default, Dec  8 
-2021, 21:08:43) [GCC 8.4.0]. This feature will be removed from ansible-core in 
-version 2.12. Deprecation warnings can be disabled by setting 
-deprecation_warnings=False in ansible.cfg.
-
-PLAY [Init] ********************************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [init : Update APT cache] *************************************************
-ok: [Nordo80-2]
-ok: [Nordo80-1]
-ok: [Nordo80-3]
-
-TASK [init : Set hostname] *****************************************************
-ok: [Nordo80-2]
-ok: [Nordo80-1]
-ok: [Nordo80-3]
-
-PLAY [Bind server] *************************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [Nordo80-3]
-ok: [Nordo80-2]
-ok: [Nordo80-1]
-
-TASK [bind : Install bind] *****************************************************
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-ok: [Nordo80-1]
-
-TASK [bind : Start service bind9] **********************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [bind : Install dnspython] ************************************************
-ok: [Nordo80-2]
-ok: [Nordo80-1]
-ok: [Nordo80-3]
-
-TASK [bind : Copy named config file] *******************************************
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-ok: [Nordo80-1]
-
-TASK [bind : Copy the template of my database] *********************************
-skipping: [Nordo80-1]
-skipping: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [bind : Copy reversed conf file] ******************************************
-skipping: [Nordo80-1]
-skipping: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [bind : Copy named conf local file] ***************************************
-ok: [Nordo80-3]
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-
-TASK [bind : Execute handlers] *************************************************
-
-TASK [bind : Add backup server A record] ***************************************
-skipping: [Nordo80-1]
-skipping: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [bind : Add additional CNAME records] *************************************
-skipping: [Nordo80-1] => (item=None) 
-skipping: [Nordo80-1] => (item=None) 
-skipping: [Nordo80-1] => (item=None) 
-skipping: [Nordo80-1] => (item=None) 
-skipping: [Nordo80-1] => (item=None) 
-skipping: [Nordo80-2] => (item=None) 
-skipping: [Nordo80-1] => (item=None) 
-skipping: [Nordo80-2] => (item=None) 
-skipping: [Nordo80-1] => (item=None) 
-skipping: [Nordo80-2] => (item=None) 
-skipping: [Nordo80-1] => (item=None) 
-skipping: [Nordo80-2] => (item=None) 
-skipping: [Nordo80-2] => (item=None) 
-skipping: [Nordo80-1] => (item=None) 
-ok: [Nordo80-3] => (item=None)
-skipping: [Nordo80-1] => (item=None) 
-skipping: [Nordo80-2] => (item=None) 
-skipping: [Nordo80-1] => (item=None) 
-skipping: [Nordo80-1]
-skipping: [Nordo80-2] => (item=None) 
-skipping: [Nordo80-2] => (item=None) 
-skipping: [Nordo80-2] => (item=None) 
-skipping: [Nordo80-2] => (item=None) 
-skipping: [Nordo80-2] => (item=None) 
-skipping: [Nordo80-2]
-ok: [Nordo80-3] => (item=None)
-ok: [Nordo80-3] => (item=None)
-ok: [Nordo80-3] => (item=None)
-ok: [Nordo80-3] => (item=None)
-ok: [Nordo80-3] => (item=None)
-ok: [Nordo80-3] => (item=None)
-ok: [Nordo80-3] => (item=None)
-ok: [Nordo80-3] => (item=None)
-ok: [Nordo80-3] => (item=None)
-ok: [Nordo80-3] => (item=None)
-ok: [Nordo80-3]
-
-TASK [bind_exporter : Install bind exporter] ***********************************
-ok: [Nordo80-2]
-ok: [Nordo80-1]
-ok: [Nordo80-3]
-
-TASK [bind_exporter : Enable bind exporter] ************************************
-ok: [Nordo80-3]
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-
-PLAY [Resolv] ******************************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [dns : disable systemd-resolved] ******************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [dns : copy resolv.conf] **************************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-PLAY [Database servers] ********************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-
-TASK [mysql : Install mysql server] ********************************************
-ok: [Nordo80-2]
-ok: [Nordo80-1]
-
-TASK [mysql : Install pymysql] *************************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-
-TASK [mysql : Start mysql server] **********************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-
-TASK [mysql : Copy mysql config and restart mysql server] **********************
-ok: [Nordo80-2]
-ok: [Nordo80-1]
-
-TASK [mysql : MySQL database] **************************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-
-TASK [mysql : Create database user with privileges] ****************************
-ok: [Nordo80-2]
-ok: [Nordo80-1]
-
-TASK [mysql : Create replication MySQL user] ***********************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-
-TASK [mysql : Read only mode on replica server] ********************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-
-TASK [mysql_backup : Create a directory mysql in backup] ***********************
-ok: [Nordo80-2]
-ok: [Nordo80-1]
-
-TASK [mysql_backup : Create MySQL user backup] *********************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-
-TASK [mysql_backup : Import cnf file to backup folder] *************************
-ok: [Nordo80-2]
-ok: [Nordo80-1]
-
-TASK [mysql_backup : Mysql backup in cron] *************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-
-TASK [mysql_backup : Ensure that cron file is created] *************************
-ok: [Nordo80-2]
-ok: [Nordo80-1]
-
-PLAY [fix docker] **************************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [docker_fix : Install iptables-persistent] ********************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [docker_fix : rule for docker] ********************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [docker_fix : Restore iptables] *******************************************
-[WARNING]: Attempts to restore iptables state without rollback in case of
-mistake may lead the ansible controller to loose access to the hosts and never
-regain it before fixing firewall rules through a serial console, or any other
-way except SSH. Please set task attribute 'poll' (=15) to 0, and 'async' (=0)
-to a value >2 and not greater than 'ansible_timeout' (=10) (recommended).
-[WARNING]: Attempts to restore iptables state without rollback in case of
-mistake may lead the ansible controller to loose access to the hosts and never
-regain it before fixing firewall rules through a serial console, or any other
-way except SSH. Please set task attribute 'poll' (=15) to 0, and 'async' (=0)
-to a value >2 and not greater than 'ansible_timeout' (=10) (recommended).
-[WARNING]: Attempts to restore iptables state without rollback in case of
-mistake may lead the ansible controller to loose access to the hosts and never
-regain it before fixing firewall rules through a serial console, or any other
-way except SSH. Please set task attribute 'poll' (=15) to 0, and 'async' (=0)
-to a value >2 and not greater than 'ansible_timeout' (=10) (recommended).
-ok: [Nordo80-3]
-ok: [Nordo80-2]
-ok: [Nordo80-1]
-
-PLAY [Docker] ******************************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [docker : Install docker] *************************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [docker : Start docker service] *******************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [docker : Log into Dockerhub] *********************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [agama : Create install directory] ****************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [agama : Install docker file] *********************************************
-ok: [Nordo80-2]
-ok: [Nordo80-1]
-ok: [Nordo80-3]
-
-TASK [agama : Build agama container] *******************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [agama : Install and start agama 1] ***************************************
-ok: [Nordo80-2]
-ok: [Nordo80-1]
-ok: [Nordo80-3]
-
-TASK [agama : Install and start agama 2] ***************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-PLAY [Nginx all VMS] ***********************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [nginx : Install nginx] ***************************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [nginx : Copy config] *****************************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [nginx : Start nginx] *****************************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [nginx_exporter : Install Nginx exporter] *********************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [nginx_exporter : Enable nginx-exporter] **********************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [nginx_exporter : Copy exporter config] ***********************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-PLAY [Install Node Exporters] **************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [node_exporter : Exporter packages] ***************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [node_exporter : Enable node exporter] ************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-PLAY [Install Prometheus] ******************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [Nordo80-3]
-
-TASK [prometheus : Install Prometheus] *****************************************
-ok: [Nordo80-3]
-
-TASK [prometheus : Configure Prometheus] ***************************************
-ok: [Nordo80-3]
-
-TASK [prometheus : Make prometheus available] **********************************
-ok: [Nordo80-3]
-
-PLAY [Database server 2] *******************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-
-TASK [mysql_exporter : Install mysqld exporter] ********************************
-ok: [Nordo80-2]
-ok: [Nordo80-1]
-
-TASK [mysql_exporter : Create MySQL user exporter] *****************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-
-TASK [mysql_exporter : my.cnf template] ****************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-
-TASK [mysql_exporter : Prometheus mysqld exporter template] ********************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-
-TASK [mysql_exporter : sleep 10 sec] *******************************************
-Pausing for 10 seconds
-(ctrl+C then 'C' = continue early, ctrl+C then 'A' = abort)
-ok: [Nordo80-1]
-
-TASK [mysql_exporter : Start mysql exporter] ***********************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-
-PLAY [grafana] *****************************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [Nordo80-3]
-
-TASK [grafana : Create grafana directories] ************************************
-ok: [Nordo80-3] => (item=dashboards)
-ok: [Nordo80-3] => (item=datasources)
-
-TASK [grafana : Put telegraf.yaml to datasources] ******************************
-ok: [Nordo80-3]
-
-TASK [grafana : Put influxdb.yaml to datasources] ******************************
-ok: [Nordo80-3]
-
-TASK [grafana : Put prometheus.yaml to datasources] ****************************
-ok: [Nordo80-3]
-
-TASK [grafana : Put dashboard.yaml to dashboards] ******************************
-ok: [Nordo80-3]
-
-TASK [grafana : Put dashboard files to dashboards] *****************************
-ok: [Nordo80-3] => (item=main.json)
-ok: [Nordo80-3] => (item=mysql.json)
-ok: [Nordo80-3] => (item=syslog.json)
-
-TASK [grafana : Put grafana config] ********************************************
-ok: [Nordo80-3]
-
-TASK [grafana : Install and start the grafana in the docker] *******************
-ok: [Nordo80-3]
-
-PLAY [Install InfluxDB and setup Telegraph] ************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [Nordo80-3]
-
-TASK [influxdb : Add apt key for influxDB] *************************************
-ok: [Nordo80-3]
-
-TASK [influxdb : Add specified repository into sources list] *******************
-ok: [Nordo80-3]
-
-TASK [influxdb : Install InfluxDB] *********************************************
-ok: [Nordo80-3]
-
-TASK [influxdb : Start and enable influxdb] ************************************
-ok: [Nordo80-3]
-
-TASK [influxdb : Install Telegraf] *********************************************
-ok: [Nordo80-3]
-
-TASK [influxdb : influxdb configuration] ***************************************
-ok: [Nordo80-3]
-
-TASK [influxdb : Reconfigure Telegraf] *****************************************
-ok: [Nordo80-3]
-
-TASK [influxdb : Start service Influxdb] ***************************************
-ok: [Nordo80-3]
-
-TASK [influxdb : Start service Telegraf] ***************************************
-ok: [Nordo80-3]
-
-TASK [influxdb_exporter : Download influxdb stats exporter] ********************
-ok: [Nordo80-3]
-
-TASK [influxdb_exporter : Change config for influxdb stats exporter service] ***
-ok: [Nordo80-3]
-
-TASK [influxdb_exporter : Start influxdb stats exporter service] ***************
-ok: [Nordo80-3]
-
-TASK [influxdb_backup : Create a directory influxdb in backup] *****************
-ok: [Nordo80-3]
-
-TASK [influxdb_backup : Influxdb backup in cron] *******************************
-ok: [Nordo80-3]
-
-PLAY [Rsyslog configuration] ***************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [rsyslog : Reconfigure Rsyslog] *******************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-PLAY [Pinger script setup] *****************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [Nordo80-1]
-
-TASK [pinger : Install curl] ***************************************************
-ok: [Nordo80-1]
-
-TASK [pinger : Install fping] **************************************************
-ok: [Nordo80-1]
-
-TASK [pinger : Add the user "pinger"] ******************************************
-ok: [Nordo80-1]
-
-TASK [pinger : Create pinger configuration directory] **************************
-ok: [Nordo80-1]
-
-TASK [pinger : Import pinger configuration] ************************************
-ok: [Nordo80-1]
-
-TASK [pinger : Change script location] *****************************************
-ok: [Nordo80-1]
-
-TASK [pinger : Create pinger service] ******************************************
-ok: [Nordo80-1]
-
-TASK [pinger : Execute handlers] ***********************************************
-
-TASK [pinger : Start pinger] ***************************************************
-ok: [Nordo80-1]
-
-PLAY [Backup] ******************************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [Nordo80-2]
-ok: [Nordo80-1]
-ok: [Nordo80-3]
-
-TASK [backup : Create user backup] *********************************************
-ok: [Nordo80-3]
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-
-TASK [backup : Create a directory if it does not exist] ************************
-ok: [Nordo80-2]
-ok: [Nordo80-1]
-ok: [Nordo80-3]
-
-TASK [backup : put known hosts] ************************************************
-An exception occurred during task execution. To see the full traceback, use -vvv. The error was: ValueError: Invalid padding bytes.
-fatal: [Nordo80-1]: FAILED! => {"changed": false, "msg": "ValueError: Invalid padding bytes."}
-An exception occurred during task execution. To see the full traceback, use -vvv. The error was: ValueError: Invalid padding bytes.
-fatal: [Nordo80-2]: FAILED! => {"changed": false, "msg": "ValueError: Invalid padding bytes."}
-An exception occurred during task execution. To see the full traceback, use -vvv. The error was: ValueError: Invalid padding bytes.
-fatal: [Nordo80-3]: FAILED! => {"changed": false, "msg": "ValueError: Invalid padding bytes."}
-
-PLAY RECAP *********************************************************************
-Nordo80-1                  : ok=72   changed=0    unreachable=0    failed=1    skipped=4    rescued=0    ignored=0   
-Nordo80-2                  : ok=62   changed=0    unreachable=0    failed=1    skipped=4    rescued=0    ignored=0   
-Nordo80-3                  : ok=74   changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
-
-[DEPRECATION WARNING]: Ansible will require Python 3.8 or newer on the 
-controller starting with Ansible 2.12. Current version: 3.6.9 (default, Dec  8 
-2021, 21:08:43) [GCC 8.4.0]. This feature will be removed from ansible-core in 
-version 2.12. Deprecation warnings can be disabled by setting 
-deprecation_warnings=False in ansible.cfg.
-Nordo80-2 | CHANGED => {
-    "changed": true,
-    "elapsed": 40,
-    "rebooted": true
-}
-Nordo80-1 | CHANGED => {
-    "changed": true,
-    "elapsed": 41,
-    "rebooted": true
-}
-Nordo80-3 | CHANGED => {
-    "changed": true,
-    "elapsed": 41,
-    "rebooted": true
-}
 [DEPRECATION WARNING]: Ansible will require Python 3.8 or newer on the 
 controller starting with Ansible 2.12. Current version: 3.6.9 (default, Dec  8 
 2021, 21:08:43) [GCC 8.4.0]. This feature will be removed from ansible-core in 
@@ -6489,520 +5977,15 @@ ok: [Nordo80-1]
 ok: [Nordo80-3]
 
 TASK [init : Update APT cache] *************************************************
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-ok: [Nordo80-1]
-
-TASK [init : Set hostname] *****************************************************
-ok: [Nordo80-2]
-ok: [Nordo80-1]
-ok: [Nordo80-3]
-
-PLAY [Bind server] *************************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [Nordo80-2]
-ok: [Nordo80-1]
-ok: [Nordo80-3]
-
-TASK [bind : Install bind] *****************************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [bind : Start service bind9] **********************************************
-ok: [Nordo80-2]
-ok: [Nordo80-1]
-ok: [Nordo80-3]
-
-TASK [bind : Install dnspython] ************************************************
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-ok: [Nordo80-1]
-
-TASK [bind : Copy named config file] *******************************************
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-ok: [Nordo80-1]
-
-TASK [bind : Copy the template of my database] *********************************
-skipping: [Nordo80-1]
-skipping: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [bind : Copy reversed conf file] ******************************************
-skipping: [Nordo80-1]
-skipping: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [bind : Copy named conf local file] ***************************************
-ok: [Nordo80-3]
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-
-TASK [bind : Execute handlers] *************************************************
-
-TASK [bind : Add backup server A record] ***************************************
-skipping: [Nordo80-1]
-skipping: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [bind : Add additional CNAME records] *************************************
-skipping: [Nordo80-1] => (item=None) 
-skipping: [Nordo80-1] => (item=None) 
-skipping: [Nordo80-1] => (item=None) 
-skipping: [Nordo80-1] => (item=None) 
-skipping: [Nordo80-1] => (item=None) 
-skipping: [Nordo80-2] => (item=None) 
-skipping: [Nordo80-1] => (item=None) 
-skipping: [Nordo80-2] => (item=None) 
-skipping: [Nordo80-1] => (item=None) 
-skipping: [Nordo80-2] => (item=None) 
-skipping: [Nordo80-1] => (item=None) 
-skipping: [Nordo80-2] => (item=None) 
-ok: [Nordo80-3] => (item=None)
-skipping: [Nordo80-2] => (item=None) 
-skipping: [Nordo80-1] => (item=None) 
-skipping: [Nordo80-1] => (item=None) 
-skipping: [Nordo80-2] => (item=None) 
-skipping: [Nordo80-1] => (item=None) 
-skipping: [Nordo80-1]
-skipping: [Nordo80-2] => (item=None) 
-skipping: [Nordo80-2] => (item=None) 
-skipping: [Nordo80-2] => (item=None) 
-skipping: [Nordo80-2] => (item=None) 
-skipping: [Nordo80-2] => (item=None) 
-skipping: [Nordo80-2]
-ok: [Nordo80-3] => (item=None)
-ok: [Nordo80-3] => (item=None)
-ok: [Nordo80-3] => (item=None)
-ok: [Nordo80-3] => (item=None)
-ok: [Nordo80-3] => (item=None)
-ok: [Nordo80-3] => (item=None)
-ok: [Nordo80-3] => (item=None)
-ok: [Nordo80-3] => (item=None)
-ok: [Nordo80-3] => (item=None)
-ok: [Nordo80-3] => (item=None)
-ok: [Nordo80-3]
-
-TASK [bind_exporter : Install bind exporter] ***********************************
-ok: [Nordo80-3]
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-
-TASK [bind_exporter : Enable bind exporter] ************************************
-ok: [Nordo80-3]
-ok: [Nordo80-2]
-ok: [Nordo80-1]
-
-PLAY [Resolv] ******************************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [dns : disable systemd-resolved] ******************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [dns : copy resolv.conf] **************************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-PLAY [Database servers] ********************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-
-TASK [mysql : Install mysql server] ********************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-
-TASK [mysql : Install pymysql] *************************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-
-TASK [mysql : Start mysql server] **********************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-
-TASK [mysql : Copy mysql config and restart mysql server] **********************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-
-TASK [mysql : MySQL database] **************************************************
-ok: [Nordo80-2]
-ok: [Nordo80-1]
-
-TASK [mysql : Create database user with privileges] ****************************
-ok: [Nordo80-2]
-ok: [Nordo80-1]
-
-TASK [mysql : Create replication MySQL user] ***********************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-
-TASK [mysql : Read only mode on replica server] ********************************
-ok: [Nordo80-2]
-ok: [Nordo80-1]
-
-TASK [mysql_backup : Create a directory mysql in backup] ***********************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-
-TASK [mysql_backup : Create MySQL user backup] *********************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-
-TASK [mysql_backup : Import cnf file to backup folder] *************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-
-TASK [mysql_backup : Mysql backup in cron] *************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-
-TASK [mysql_backup : Ensure that cron file is created] *************************
-ok: [Nordo80-2]
-ok: [Nordo80-1]
-
-PLAY [fix docker] **************************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [docker_fix : Install iptables-persistent] ********************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [docker_fix : rule for docker] ********************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [docker_fix : Restore iptables] *******************************************
-[WARNING]: Attempts to restore iptables state without rollback in case of
-mistake may lead the ansible controller to loose access to the hosts and never
-regain it before fixing firewall rules through a serial console, or any other
-way except SSH. Please set task attribute 'poll' (=15) to 0, and 'async' (=0)
-to a value >2 and not greater than 'ansible_timeout' (=10) (recommended).
-[WARNING]: Attempts to restore iptables state without rollback in case of
-mistake may lead the ansible controller to loose access to the hosts and never
-regain it before fixing firewall rules through a serial console, or any other
-way except SSH. Please set task attribute 'poll' (=15) to 0, and 'async' (=0)
-to a value >2 and not greater than 'ansible_timeout' (=10) (recommended).
-[WARNING]: Attempts to restore iptables state without rollback in case of
-mistake may lead the ansible controller to loose access to the hosts and never
-regain it before fixing firewall rules through a serial console, or any other
-way except SSH. Please set task attribute 'poll' (=15) to 0, and 'async' (=0)
-to a value >2 and not greater than 'ansible_timeout' (=10) (recommended).
-ok: [Nordo80-3]
-ok: [Nordo80-2]
-ok: [Nordo80-1]
-
-PLAY [Docker] ******************************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [Nordo80-1]
-ok: [Nordo80-3]
-ok: [Nordo80-2]
-
-TASK [docker : Install docker] *************************************************
-ok: [Nordo80-2]
-ok: [Nordo80-1]
-ok: [Nordo80-3]
-
-TASK [docker : Start docker service] *******************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [docker : Log into Dockerhub] *********************************************
-ok: [Nordo80-3]
-ok: [Nordo80-2]
-ok: [Nordo80-1]
-
-TASK [agama : Create install directory] ****************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [agama : Install docker file] *********************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [agama : Build agama container] *******************************************
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-ok: [Nordo80-1]
-
-TASK [agama : Install and start agama 1] ***************************************
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-ok: [Nordo80-1]
-
-TASK [agama : Install and start agama 2] ***************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-PLAY [Nginx all VMS] ***********************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [nginx : Install nginx] ***************************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [nginx : Copy config] *****************************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [nginx : Start nginx] *****************************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [nginx_exporter : Install Nginx exporter] *********************************
-ok: [Nordo80-2]
-ok: [Nordo80-1]
-ok: [Nordo80-3]
-
-TASK [nginx_exporter : Enable nginx-exporter] **********************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [nginx_exporter : Copy exporter config] ***********************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-PLAY [Install Node Exporters] **************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [node_exporter : Exporter packages] ***************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [node_exporter : Enable node exporter] ************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-PLAY [Install Prometheus] ******************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [Nordo80-3]
-
-TASK [prometheus : Install Prometheus] *****************************************
-ok: [Nordo80-3]
-
-TASK [prometheus : Configure Prometheus] ***************************************
-ok: [Nordo80-3]
-
-TASK [prometheus : Make prometheus available] **********************************
-ok: [Nordo80-3]
-
-PLAY [Database server 2] *******************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-
-TASK [mysql_exporter : Install mysqld exporter] ********************************
-ok: [Nordo80-2]
-ok: [Nordo80-1]
-
-TASK [mysql_exporter : Create MySQL user exporter] *****************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-
-TASK [mysql_exporter : my.cnf template] ****************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-
-TASK [mysql_exporter : Prometheus mysqld exporter template] ********************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-
-TASK [mysql_exporter : sleep 10 sec] *******************************************
-Pausing for 10 seconds
-(ctrl+C then 'C' = continue early, ctrl+C then 'A' = abort)
-ok: [Nordo80-1]
-
-TASK [mysql_exporter : Start mysql exporter] ***********************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-
-PLAY [grafana] *****************************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [Nordo80-3]
-
-TASK [grafana : Create grafana directories] ************************************
-ok: [Nordo80-3] => (item=dashboards)
-ok: [Nordo80-3] => (item=datasources)
-
-TASK [grafana : Put telegraf.yaml to datasources] ******************************
-ok: [Nordo80-3]
-
-TASK [grafana : Put influxdb.yaml to datasources] ******************************
-ok: [Nordo80-3]
-
-TASK [grafana : Put prometheus.yaml to datasources] ****************************
-ok: [Nordo80-3]
-
-TASK [grafana : Put dashboard.yaml to dashboards] ******************************
-ok: [Nordo80-3]
-
-TASK [grafana : Put dashboard files to dashboards] *****************************
-ok: [Nordo80-3] => (item=main.json)
-ok: [Nordo80-3] => (item=mysql.json)
-ok: [Nordo80-3] => (item=syslog.json)
-
-TASK [grafana : Put grafana config] ********************************************
-ok: [Nordo80-3]
-
-TASK [grafana : Install and start the grafana in the docker] *******************
-ok: [Nordo80-3]
-
-PLAY [Install InfluxDB and setup Telegraph] ************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [Nordo80-3]
-
-TASK [influxdb : Add apt key for influxDB] *************************************
-ok: [Nordo80-3]
-
-TASK [influxdb : Add specified repository into sources list] *******************
-ok: [Nordo80-3]
-
-TASK [influxdb : Install InfluxDB] *********************************************
-ok: [Nordo80-3]
-
-TASK [influxdb : Start and enable influxdb] ************************************
-ok: [Nordo80-3]
-
-TASK [influxdb : Install Telegraf] *********************************************
-ok: [Nordo80-3]
-
-TASK [influxdb : influxdb configuration] ***************************************
-ok: [Nordo80-3]
-
-TASK [influxdb : Reconfigure Telegraf] *****************************************
-ok: [Nordo80-3]
-
-TASK [influxdb : Start service Influxdb] ***************************************
-ok: [Nordo80-3]
-
-TASK [influxdb : Start service Telegraf] ***************************************
-ok: [Nordo80-3]
-
-TASK [influxdb_exporter : Download influxdb stats exporter] ********************
-ok: [Nordo80-3]
-
-TASK [influxdb_exporter : Change config for influxdb stats exporter service] ***
-ok: [Nordo80-3]
-
-TASK [influxdb_exporter : Start influxdb stats exporter service] ***************
-ok: [Nordo80-3]
-
-TASK [influxdb_backup : Create a directory influxdb in backup] *****************
-ok: [Nordo80-3]
-
-TASK [influxdb_backup : Influxdb backup in cron] *******************************
-ok: [Nordo80-3]
-
-PLAY [Rsyslog configuration] ***************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [rsyslog : Reconfigure Rsyslog] *******************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-PLAY [Pinger script setup] *****************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [Nordo80-1]
-
-TASK [pinger : Install curl] ***************************************************
-ok: [Nordo80-1]
-
-TASK [pinger : Install fping] **************************************************
-ok: [Nordo80-1]
-
-TASK [pinger : Add the user "pinger"] ******************************************
-ok: [Nordo80-1]
-
-TASK [pinger : Create pinger configuration directory] **************************
-ok: [Nordo80-1]
-
-TASK [pinger : Import pinger configuration] ************************************
-ok: [Nordo80-1]
-
-TASK [pinger : Change script location] *****************************************
-ok: [Nordo80-1]
-
-TASK [pinger : Create pinger service] ******************************************
-ok: [Nordo80-1]
-
-TASK [pinger : Execute handlers] ***********************************************
-
-TASK [pinger : Start pinger] ***************************************************
-ok: [Nordo80-1]
-
-PLAY [Backup] ******************************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [backup : Create user backup] *********************************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [backup : Create a directory if it does not exist] ************************
-ok: [Nordo80-1]
-ok: [Nordo80-2]
-ok: [Nordo80-3]
-
-TASK [backup : put known hosts] ************************************************
-An exception occurred during task execution. To see the full traceback, use -vvv. The error was: ValueError: Invalid padding bytes.
-fatal: [Nordo80-1]: FAILED! => {"changed": false, "msg": "ValueError: Invalid padding bytes."}
-An exception occurred during task execution. To see the full traceback, use -vvv. The error was: ValueError: Invalid padding bytes.
-fatal: [Nordo80-2]: FAILED! => {"changed": false, "msg": "ValueError: Invalid padding bytes."}
-An exception occurred during task execution. To see the full traceback, use -vvv. The error was: ValueError: Invalid padding bytes.
-fatal: [Nordo80-3]: FAILED! => {"changed": false, "msg": "ValueError: Invalid padding bytes."}
-
-PLAY RECAP *********************************************************************
-Nordo80-1                  : ok=72   changed=0    unreachable=0    failed=1    skipped=4    rescued=0    ignored=0   
-Nordo80-2                  : ok=62   changed=0    unreachable=0    failed=1    skipped=4    rescued=0    ignored=0   
-Nordo80-3                  : ok=74   changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
-
-P jaan  16 13:50:50 EET 2022
+ [ERROR]: User interrupted execution
+[DEPRECATION WARNING]: Ansible will require Python 3.8 or newer on the 
+controller starting with Ansible 2.12. Current version: 3.6.9 (default, Dec  8 
+2021, 21:08:43) [GCC 8.4.0]. This feature will be removed from ansible-core in 
+version 2.12. Deprecation warnings can be disabled by setting 
+deprecation_warnings=False in ansible.cfg.
+ [ERROR]: User interrupted execution
+[DEPRECATION WARNING]: Ansible will require Python 3.8 or newer on the 
+controller starting with Ansible 2.12. Current version: 3.6.9 (default, Dec  8 
+2021, 21:08:43) [GCC 8.4.0]. This feature will be removed from ansible-core in 
+version 2.12. Deprecation warnings can be disabled by setting 
+deprecation_warnings=False in ansible.cfg.

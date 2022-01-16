@@ -42,7 +42,7 @@ Command to download the backup:
 1. Login as backup:
     su backup
 2. Run command:
-    sudo -u backup mysqldump agama > /home/backup/mysql/agama.sql
+    mysqldump agama > /home/backup/mysql/agama.sql
 3. Download backup:
     duplicity --no-encryption incremental /home/backup/mysql/ rsync://Nordo80@backup.efiffel.ttu//home/Nordo80/mysql/
 
