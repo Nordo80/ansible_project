@@ -22,6 +22,7 @@ Command to restore from backup:
 3. Delete 'telegraf' database:
     influx -execute 'DROP DATABASE telegraf'
 4. Restore telegraf:
+    sudo -u backup duplicity --no-encryption restore rsync://Nordo80@backup.efiffel.ttu//home/Nordo80/influxdb/ /home/backup/restore/influxdb/
     influxd restore -portable -database telegraf /home/backup/restore/influxdb/
 5. Start telegraf service:
     systemctl start telegraf
@@ -38,7 +39,7 @@ Checking restore results:
 
 #Restore MySQL agama data from the backup:
 Command to download the backup:
-!!!Must be run on managed host (Nordo80-2)!!!!
+!!!Must be run on managed host (Nordo80-2)!!!
 1. Login as backup:
     su backup
 2. Run command:
