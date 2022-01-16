@@ -14,6 +14,7 @@
       host: "%"
       priv: "agama.*:LOCK TABLES,SELECT"
       login_unix_socket: /var/run/mysqld/mysqld.sock
+    no_log: true
 
   - name: Import cnf file to backup folder
     template:
